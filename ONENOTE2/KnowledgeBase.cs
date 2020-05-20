@@ -11,39 +11,91 @@ namespace ONENOTE2
     [Serializable()]
     class KnowledgeBase
     {
-        private List<Note> notes = null;//笔记的名字
-        private String recordLocation;//文件存储位置 E:\新桌面\团队项目开发\kb1
-        private String name;//kb1
-        public KnowledgeBase(String recordLocation)//导入的时候
+        #region 成员数据
+
+        /// <summary>
+        /// 知识库包含的笔记页
+        /// </summary>
+        // 
+        private List<Note> notes = new List<Note>();
+
+        /// <summary>
+        /// 知识库对应的文件夹在文件系统中的路径
+        /// </summary>
+        private String recordLocation;
+
+        /// <summary>
+        /// 知识库的名字
+        /// </summary>
+        private String name;
+
+        #endregion
+
+        #region 构造方法
+
+        /// <summary>
+        /// 构造方法：导入知识库
+        /// </summary>
+        /// <param name="recordLocation"></param>
+        public KnowledgeBase(String recordLocation)
         {
+            //知识库在文件系统中的路径
             this.recordLocation = recordLocation;
+
+            //知识库名
             int index = recordLocation.LastIndexOf(@"\") + 1;
-            name = recordLocation.Substring(index, recordLocation.Length-index);
-            
+            name = recordLocation.Substring(index, recordLocation.Length-index);            
         }
-        public KnowledgeBase(String recordLocation,String name)//新建的时候
+
+        /// <summary>
+        /// 构造方法：新建知识库
+        /// </summary>
+        /// <param name="recordLocation"></param>
+        /// <param name="name"></param>
+        public KnowledgeBase(String recordLocation,String name)
         {
+            //知识库在文件系统中的路径
             this.recordLocation = recordLocation + @"\" + name;
+
+            //知识库名
             this.name = name;
-
         }
 
+        #endregion
+
+        #region 成员方法
+
+        /// <summary>
+        /// 添加笔记页
+        /// </summary>
+        /// <param name="note"></param>
         public void addNote(Note note)
-        {
-            if(null == notes)
-            {
-                notes = new List<Note>();
-            }
-            notes.Add(note);
-            
+        {            
+            notes.Add(note);            
         }
+
+        /// <summary>
+        /// 获取知识库名
+        /// </summary>
+        /// <returns></returns>
         public String getName()
         {
             return name;
         }
+
+        /// <summary>
+        /// 获取知识库路径
+        /// </summary>
+        /// <returns></returns>
         public string getRecordLocation() {
             return recordLocation;
         }
+
+        /// <summary>
+        /// 获取笔记页
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public Note getNote(int index)
         {
             if(index < notes.Count)
@@ -55,7 +107,13 @@ namespace ONENOTE2
                 return null;
             }
         }
-        public void copyNotes(String directoryName)//要复制到的文件夹的名字
+
+        /// <summary>
+        /// 复制知识库内所有笔记页到知识库directoryName中。
+        /// directoryName是目标文件夹的名字
+        /// </summary>
+        /// <param name="directoryName"></param>
+        public void copyNotes(String directoryName)
         {
             try
             {
@@ -73,10 +131,21 @@ namespace ONENOTE2
                 MessageBox.Show(m_sb.ToString());
             }
         }
+
+        /// <summary>
+        /// 获取笔记页列表
+        /// </summary>
+        /// <returns></returns>
         public List<Note> GetNotes()
         {
             return notes;
         }
+
+        /// <summary>
+        /// 判断该知识库中是否包含path指向的笔记页
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public Boolean existNote(String path)
         {
             foreach(Note note in notes)
@@ -85,6 +154,8 @@ namespace ONENOTE2
             }
             return false;
         }
+
+        #endregion
 
     }
 }
