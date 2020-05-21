@@ -18,6 +18,24 @@ namespace ONENOTE2
             InitializeComponent();
             nodeForm = this;
         }
-       
+
+        public static void NoteRedo()
+        {
+            RichTextBox currentNote = nodeForm.edit_richTextBox;
+            if (currentNote.CanRedo)
+            {
+                currentNote.Redo();
+            }
+        }
+
+        public static void NoteUndo()
+        {
+            RichTextBox currentNote = nodeForm.edit_richTextBox;
+            if (currentNote.CanUndo)
+            {
+                currentNote.Undo();
+            }
+        }
+
     }
 }
