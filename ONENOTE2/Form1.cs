@@ -10,11 +10,18 @@ namespace ONENOTE2
 
     public partial class Form1 : Form
     {
+        #region 数据
+
         public static Form1 form1;
         public static String nodeName;
         public int len = 0;     //用于改变字体
         public int curRtbStart = 0;//用于改变字体
         Boolean boldbool = false,underlinebool=false, inclinesbool=false;//用于判断是否字体加粗还是取消加粗
+
+        #endregion
+
+        #region 构造方法与加载
+
         public Form1()//窗口初始化
         {
             InitializeComponent();
@@ -41,85 +48,29 @@ namespace ONENOTE2
                 }
             }
         }
-        
-        private void ChangFontSize(float fontSize)           //改变字体大小，第一个参数为字号大小
-        {
-            
-            if (fontSize <= 0.0)
-                throw new InvalidProgramException("字号参数错误");
-            curRtbStart = NodeForm.nodeForm.edit_richTextBox.SelectionStart;
-            len = NodeForm.nodeForm.edit_richTextBox.SelectionLength;
-            RichTextBox tempRichTextBox = new RichTextBox();
-            int tempRtbStart = 0;
-            Font font = NodeForm.nodeForm.edit_richTextBox.SelectionFont;
-            if (len <= 1 && font != null)
-            {
-                NodeForm.nodeForm.edit_richTextBox.SelectionFont = new Font(font.Name, fontSize, font.Style);
-                return;
-            }
-            tempRichTextBox.Rtf = NodeForm.nodeForm.edit_richTextBox.SelectedRtf;
-            for (int i = 0; i < len; i++)
-            {
-                tempRichTextBox.Select(tempRtbStart + i, 1);
-                tempRichTextBox.SelectionFont = new Font(tempRichTextBox.SelectionFont.Name, fontSize, tempRichTextBox.SelectionFont.Style);
-            }
-            tempRichTextBox.Select(tempRtbStart, len);
-            NodeForm.nodeForm.edit_richTextBox.SelectedRtf = tempRichTextBox.SelectedRtf;
-            NodeForm.nodeForm.edit_richTextBox.Select(curRtbStart, len);
-            NodeForm.nodeForm.edit_richTextBox.Focus();
-        }
-        private void SetFontStyle(FontStyle fontstyle)//设置字体粗体斜体下划线
-        {
-            if (fontstyle != FontStyle.Bold && fontstyle != FontStyle.Italic && fontstyle != FontStyle.Underline && fontstyle != FontStyle.Strikeout && fontstyle != FontStyle.Regular)
-                throw new System.InvalidProgramException("字体格式错误");
-            RichTextBox tempRichTextBox = new RichTextBox();
-            int tempRtbStart = 0;
-            Font font = NodeForm.nodeForm.edit_richTextBox.SelectionFont;
 
-            if (len <= 1 && font != null)
-            {
-                NodeForm.nodeForm.edit_richTextBox.SelectionFont = new Font(font, font.Style | fontstyle);
-                return;
-            }
-            tempRichTextBox.Rtf = NodeForm.nodeForm.edit_richTextBox.SelectedRtf;
-            for (int i = 0; i < len; i++)
-            {
-                tempRichTextBox.Select(tempRtbStart + i, 1);
-                tempRichTextBox.SelectionFont =
-                        new Font(tempRichTextBox.SelectionFont,
-                            tempRichTextBox.SelectionFont.Style | fontstyle);
-            }
-            tempRichTextBox.Select(tempRtbStart, len);
-            NodeForm.nodeForm.edit_richTextBox.SelectedRtf = tempRichTextBox.SelectedRtf;
-            NodeForm.nodeForm.edit_richTextBox.Select(curRtbStart, len);
-            NodeForm.nodeForm.edit_richTextBox.Focus();
-        }
-        private void RemoveFontStyle(FontStyle fontstyle)//取消字体粗体斜体下划线
-        {
-            if (fontstyle != FontStyle.Bold && fontstyle != FontStyle.Italic && fontstyle != FontStyle.Underline && fontstyle != FontStyle.Strikeout && fontstyle != FontStyle.Regular)
-                throw new System.InvalidProgramException("字体格式错误");
-            RichTextBox tempRichTextBox = new RichTextBox();
-            int tempRtbStart = 0;
-            Font font = NodeForm.nodeForm.edit_richTextBox.SelectionFont;
+        #endregion
 
-            if (len <= 1 && font != null)
-            {
-                NodeForm.nodeForm.edit_richTextBox.SelectionFont = new Font(font, font.Style ^ fontstyle);
-                return;
-            }
-            tempRichTextBox.Rtf = NodeForm.nodeForm.edit_richTextBox.SelectedRtf;
-            for (int i = 0; i < len; i++)
-            {
-                tempRichTextBox.Select(tempRtbStart + i, 1);
-                tempRichTextBox.SelectionFont = new Font(tempRichTextBox.SelectionFont,
-                     tempRichTextBox.SelectionFont.Style ^ fontstyle);
-            }
-            tempRichTextBox.Select(tempRtbStart, len);
-            NodeForm.nodeForm.edit_richTextBox.SelectedRtf = tempRichTextBox.SelectedRtf;
-            NodeForm.nodeForm.edit_richTextBox.Select(curRtbStart, len);
-            NodeForm.nodeForm.edit_richTextBox.Focus();
+        #region 字体类型，字号，粗体、斜体、下划线（Style），颜色
+
+        #region 字体类型
+        /// <summary>
+        /// 改变字体的点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void font_toolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String fonttype = font_toolStripComboBox.SelectedItem.ToString();
+            ChangeFont(fonttype);
+
         }
-        private void ChangeFont(String fontName)// 改变字体类型
+
+        /// <summary>
+        /// 改变字体类型
+        /// </summary>
+        /// <param name="fontName"></param>
+        private void ChangeFont(String fontName)
         {
             if (fontName == "")
                 throw new System.InvalidProgramException("字体参数错误");
@@ -146,7 +97,178 @@ namespace ONENOTE2
             NodeForm.nodeForm.edit_richTextBox.Focus();
         }
 
+        #endregion
 
+        /// <summary>
+        /// 改变字体大小，第一个参数为字号大小
+        /// </summary>
+        /// <param name="fontSize"></param>
+        private void ChangFontSize(float fontSize)
+        {
+
+            if (fontSize <= 0.0)
+                throw new InvalidProgramException("字号参数错误");
+            curRtbStart = NodeForm.nodeForm.edit_richTextBox.SelectionStart;
+            len = NodeForm.nodeForm.edit_richTextBox.SelectionLength;
+            RichTextBox tempRichTextBox = new RichTextBox();
+            int tempRtbStart = 0;
+            Font font = NodeForm.nodeForm.edit_richTextBox.SelectionFont;
+            if (len <= 1 && font != null)
+            {
+                NodeForm.nodeForm.edit_richTextBox.SelectionFont = new Font(font.Name, fontSize, font.Style);
+                return;
+            }
+            tempRichTextBox.Rtf = NodeForm.nodeForm.edit_richTextBox.SelectedRtf;
+            for (int i = 0; i < len; i++)
+            {
+                tempRichTextBox.Select(tempRtbStart + i, 1);
+                tempRichTextBox.SelectionFont = new Font(tempRichTextBox.SelectionFont.Name, fontSize, tempRichTextBox.SelectionFont.Style);
+            }
+            tempRichTextBox.Select(tempRtbStart, len);
+            NodeForm.nodeForm.edit_richTextBox.SelectedRtf = tempRichTextBox.SelectedRtf;
+            NodeForm.nodeForm.edit_richTextBox.Select(curRtbStart, len);
+            NodeForm.nodeForm.edit_richTextBox.Focus();
+        }
+
+        /// <summary>
+        /// 改变字体大小的点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void fontsize_toolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            float q = float.Parse(fontsize_toolStripComboBox.SelectedItem.ToString());
+            ChangFontSize(q);
+        }
+
+        /// <summary>
+        /// 斜体的点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void inclines_toolStripButton_Click(object sender, EventArgs e)
+        {
+            inclinesbool = !inclinesbool;
+            if (inclinesbool)
+                SetFontStyle(FontStyle.Italic);
+            else
+                RemoveFontStyle(FontStyle.Italic);
+        }
+
+        /// <summary>
+        /// 下划线的点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void underline_toolStripButton_Click(object sender, EventArgs e)
+        {
+            underlinebool = !underlinebool;
+            if (underlinebool)
+                SetFontStyle(FontStyle.Underline);
+            else
+                RemoveFontStyle(FontStyle.Underline);
+        }
+
+        /// <summary>
+        /// 设置字体粗体、斜体、下划线
+        /// </summary>
+        /// <param name="fontstyle"></param>
+        private void SetFontStyle(FontStyle fontstyle)
+        {
+            if (fontstyle != FontStyle.Bold && fontstyle != FontStyle.Italic && fontstyle != FontStyle.Underline && fontstyle != FontStyle.Strikeout && fontstyle != FontStyle.Regular)
+                throw new System.InvalidProgramException("字体格式错误");
+            RichTextBox tempRichTextBox = new RichTextBox();
+            int tempRtbStart = 0;
+            Font font = NodeForm.nodeForm.edit_richTextBox.SelectionFont;
+
+            if (len <= 1 && font != null)
+            {
+                NodeForm.nodeForm.edit_richTextBox.SelectionFont = new Font(font, font.Style | fontstyle);
+                return;
+            }
+            tempRichTextBox.Rtf = NodeForm.nodeForm.edit_richTextBox.SelectedRtf;
+            for (int i = 0; i < len; i++)
+            {
+                tempRichTextBox.Select(tempRtbStart + i, 1);
+                tempRichTextBox.SelectionFont =
+                        new Font(tempRichTextBox.SelectionFont,
+                            tempRichTextBox.SelectionFont.Style | fontstyle);
+            }
+            tempRichTextBox.Select(tempRtbStart, len);
+            NodeForm.nodeForm.edit_richTextBox.SelectedRtf = tempRichTextBox.SelectedRtf;
+            NodeForm.nodeForm.edit_richTextBox.Select(curRtbStart, len);
+            NodeForm.nodeForm.edit_richTextBox.Focus();
+        }
+
+        /// <summary>
+        /// 取消字体粗体、斜体、下划线
+        /// </summary>
+        /// <param name="fontstyle"></param>
+        private void RemoveFontStyle(FontStyle fontstyle)
+        {
+            if (fontstyle != FontStyle.Bold && fontstyle != FontStyle.Italic && fontstyle != FontStyle.Underline && fontstyle != FontStyle.Strikeout && fontstyle != FontStyle.Regular)
+                throw new System.InvalidProgramException("字体格式错误");
+            RichTextBox tempRichTextBox = new RichTextBox();
+            int tempRtbStart = 0;
+            Font font = NodeForm.nodeForm.edit_richTextBox.SelectionFont;
+
+            if (len <= 1 && font != null)
+            {
+                NodeForm.nodeForm.edit_richTextBox.SelectionFont = new Font(font, font.Style ^ fontstyle);
+                return;
+            }
+            tempRichTextBox.Rtf = NodeForm.nodeForm.edit_richTextBox.SelectedRtf;
+            for (int i = 0; i < len; i++)
+            {
+                tempRichTextBox.Select(tempRtbStart + i, 1);
+                tempRichTextBox.SelectionFont = new Font(tempRichTextBox.SelectionFont,
+                     tempRichTextBox.SelectionFont.Style ^ fontstyle);
+            }
+            tempRichTextBox.Select(tempRtbStart, len);
+            NodeForm.nodeForm.edit_richTextBox.SelectedRtf = tempRichTextBox.SelectedRtf;
+            NodeForm.nodeForm.edit_richTextBox.Select(curRtbStart, len);
+            NodeForm.nodeForm.edit_richTextBox.Focus();
+        }
+                
+
+        /// <summary>
+        /// 设置或取消粗体的点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bold_toolStripButton_Click(object sender, EventArgs e)
+        {
+            boldbool = !boldbool;
+            if (boldbool)
+            {
+                bold_toolStripButton.BackColor = Color.AliceBlue;
+                SetFontStyle(FontStyle.Bold);
+            }
+            else
+                RemoveFontStyle(FontStyle.Bold);
+        }
+
+        /// <summary>
+        /// 改变字体颜色
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void fontcolor_toolStripButton_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialor = new ColorDialog();
+
+            if (colorDialor.ShowDialog() == DialogResult.OK)
+            {
+                NodeForm.nodeForm.edit_richTextBox.SelectionColor = colorDialor.Color;                //设置 richTextbox1 中的文字颜色
+                fontcolor_toolStripButton.ForeColor = colorDialor.Color;                              //设置按钮的颜色
+            }
+
+        }
+
+
+        #endregion
+
+        #region 其他
         private void ClosePreForm()    //关闭note_tabControl当前窗口
         {
             foreach (Control item in this.note_tabControl.Controls)
@@ -281,31 +403,12 @@ namespace ONENOTE2
             Note note = noteList.ElementAt(index);
             rtx.SaveFile(note.getRecordLocation(), RichTextBoxStreamType.RichText);
         }
-    
-
-        private void inclines_toolStripButton_Click(object sender, EventArgs e)//斜体的点击事件
-        {
-            inclinesbool = !inclinesbool;
-            if (inclinesbool)
-                SetFontStyle(FontStyle.Italic);
-            else
-                RemoveFontStyle(FontStyle.Italic);
-        }
-
-        private void underline_toolStripButton_Click(object sender, EventArgs e)//下划线的点击事件
-        {
-            underlinebool = !underlinebool;      
-            if (underlinebool)
-                SetFontStyle(FontStyle.Underline);
-            else
-                RemoveFontStyle(FontStyle.Underline);
-        }
 
         private void list_treeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)//树的点击事件
         {
-           
-        }
 
+        }
+                
         private void urlinsert_toolStripButton_Click(object sender, EventArgs e)//插入链接的点击事件
         {
             UrlForm urlForm = new UrlForm();
@@ -318,32 +421,6 @@ namespace ONENOTE2
 
         }
 
-        private void fontcolor_toolStripButton_Click(object sender, EventArgs e)//改变字体颜色
-        {
-            ColorDialog colorDialor = new ColorDialog();
-        
-            if (colorDialor.ShowDialog() == DialogResult.OK)
-            {
-                NodeForm.nodeForm.edit_richTextBox.SelectionColor = colorDialor.Color;                //设置 richTextbox1 中的文字颜色
-                fontcolor_toolStripButton.ForeColor = colorDialor.Color;                              //设置按钮的颜色
-            }
-
-        }
-
-        private void font_toolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)//改变字体的点击事件
-        {
-            String fonttype = font_toolStripComboBox.SelectedItem.ToString();
-            ChangeFont(fonttype);
-
-        }
-        
-        private void fontsize_toolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)//改变字体大小的点击事件
-        {
-            float q = float.Parse(fontsize_toolStripComboBox.SelectedItem.ToString());
-            ChangFontSize(q);
-        }
-        
-        
         
         //5/18
         /*知识库加载
@@ -413,17 +490,7 @@ namespace ONENOTE2
             }
             
         }
-        private void bold_toolStripButton_Click(object sender, EventArgs e)//设置或取消粗体的点击事件
-        {
-            boldbool = !boldbool;
-            if (boldbool)
-            {
-                bold_toolStripButton.BackColor = Color.AliceBlue;
-                SetFontStyle(FontStyle.Bold);
-            }
-            else
-                RemoveFontStyle(FontStyle.Bold);
-        }
+        
        
         KonwledgeBaseManagement KBM;
         List<RichTextBox> richTextBoxes = new List<RichTextBox>();
@@ -539,11 +606,15 @@ namespace ONENOTE2
         }
 
         List<Note> noteList = new List<Note>();
+
         private void bindingNoteForm (NodeForm nodeForm,Note note)//将富文本和当前笔记绑定
         {
             richTextBoxes.Add(nodeForm.edit_richTextBox);
             noteList.Add(note);
         }
+
+        
+
         private void updateTree()//更新树目录
         {
             list_treeView.Nodes.Clear();
@@ -562,6 +633,111 @@ namespace ONENOTE2
             }
         }
 
+        #endregion
+
+        #region 撤销，重做
+        /// <summary>
+        /// 撤销
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lastOperation_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NodeForm.NoteUndo();
+        }
+
+
+        /// <summary>
+        /// 重做
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nextOperation_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NodeForm.NoteRedo();
+        }
+
+        #endregion
 
     }
+
+    #region 撤销，重做
+    /// <summary>
+    /// 封装一个操作。对于一个操作，记录其进行前后的状态，以供未来可能进行的“撤销”操作。
+    /// </summary>
+    public class Action
+    { }
+
+    public class Do
+    {
+        #region 成员数据
+        /// <summary>
+        /// 这个栈保存最近的操作以便撤销。
+        /// </summary>
+        private static Stack<Action> actionsHistory = new Stack<Action>();
+        /// <summary>
+        /// 这个栈保存可以重做的操作。
+        /// </summary>
+        private static Stack<Action> actionsToRedo = new Stack<Action>();
+        #endregion
+
+        #region 成员方法
+        /// <summary>
+        /// 判断是否可以进行“撤销”操作
+        /// </summary>
+        /// <returns></returns>
+        public static bool CanUndo()
+        {
+            return actionsHistory.Count > 0;
+        }
+
+        /// <summary>
+        /// 判断是否可以进行“重做”操作
+        /// </summary>
+        /// <returns></returns>
+        public static bool CanRedo()
+        {
+            return actionsToRedo.Count > 0;
+        }
+
+        public static void AddActionHistory(Action action)
+        {
+            actionsHistory.Push(action);
+        }
+
+        /// <summary>
+        /// 返回操作栈中最近一次操作以撤销该操作
+        /// </summary>
+        /// <returns></returns>
+        public static Action Undo()
+        {
+            if (CanUndo())
+            {
+                Action toUndo = actionsHistory.Pop();
+                actionsToRedo.Push(toUndo);
+                return toUndo;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static Action Redo()
+        {
+            if (CanRedo())
+            {
+                return actionsToRedo.Pop();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+    }
+    #endregion
+
 }

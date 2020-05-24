@@ -11,9 +11,12 @@ namespace ONENOTE2
     [Serializable()]
     class Note
     {
-        private static String format = ".rtf";
-        private String name;//n1
-        private String recordLocation;
+        #region 构造方法
+        /// <summary>
+        /// Note构造函数，注意参数顺序
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="recordLocation"></param>
         public Note(String name,String recordLocation) {
             if (name.EndsWith(format))
             {
@@ -25,17 +28,53 @@ namespace ONENOTE2
                 this.recordLocation = recordLocation + @"\" + name + format;
             }
         }
-        public String getName() {
+        #endregion
+
+        #region 成员方法
+        /// <summary>
+        /// 返回笔记页名称
+        /// </summary>
+        /// <returns></returns>
+        public String getName()
+        {
             return name;
         }
-        public String getRecordLocation() {
+
+        /// <summary>
+        /// 返回笔记页文件位置
+        /// </summary>
+        /// <returns></returns>
+        public String getRecordLocation() 
+        {
             return recordLocation;
         }
+
+        /// <summary>
+        /// 返回笔记页文件的格式（扩展名）
+        /// </summary>
+        /// <returns></returns>
         public static String getFormat()
         {
             return format;
         }
-        
-        
+        #endregion
+
+        #region 成员数据
+        /// <summary>
+        /// 预设的笔记页格式（扩展名）
+        /// </summary>
+        private static String format = ".rtf";
+
+        /// <summary>
+        /// 笔记页名字（不带扩展名）
+        /// </summary>
+        private String name;
+
+        /// <summary>
+        /// 笔记页在文件系统中的存储位置
+        /// </summary>
+        private String recordLocation;
+        #endregion
+
     }
 }
