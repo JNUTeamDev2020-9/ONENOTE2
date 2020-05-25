@@ -1,0 +1,13 @@
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\bin\Debug\ONENOTE2.exe.config
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\bin\Debug\ONENOTE2.exe
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\bin\Debug\ONENOTE2.pdb
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.Form1.resources
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.UrlForm.resources
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.NodeForm.resources
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.Tip.resources
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.Properties.Resources.resources
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.exe
+C:\Users\asus\Desktop\ONENOTE2-master (1)\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.pdb
