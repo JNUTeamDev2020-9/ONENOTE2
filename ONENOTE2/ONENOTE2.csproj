@@ -62,7 +62,6 @@
     <Compile Include="NoteForm.Designer.cs">
       <DependentUpon>NoteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NotePage.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

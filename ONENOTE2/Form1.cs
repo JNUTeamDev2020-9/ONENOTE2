@@ -590,7 +590,8 @@ namespace ONENOTE2
             {
                 Tip notepage = new Tip("请输入笔记页名称");
                 notepage.ShowDialog();
-                if (nodeName.Equals("")) return;
+                if (nodeName == null || nodeName.Equals(""))
+                { return; }
 
                 ClosePreForm();//嵌入窗体前判断当前容器中是否有窗口没关掉
                 NodeForm nodeForm = new NodeForm();
