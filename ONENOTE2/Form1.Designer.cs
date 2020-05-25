@@ -404,10 +404,10 @@
             this.note_tabControl.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.note_tabControl.MinimumSize = new System.Drawing.Size(400, 350);
             this.note_tabControl.Name = "note_tabControl";
+            this.note_tabControl.Padding = new System.Drawing.Point(15, 5);
             this.note_tabControl.SelectedIndex = 0;
             this.note_tabControl.Size = new System.Drawing.Size(682, 350);
             this.note_tabControl.TabIndex = 3;
-            this.note_tabControl.Padding = new System.Drawing.Point(15, 5);
             this.note_tabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.note_tabControl_DrawItem);
             this.note_tabControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.note_tabControl_MouseDown);
             // 
@@ -428,21 +428,21 @@
             // 新建笔记ToolStripMenuItem
             // 
             this.新建笔记ToolStripMenuItem.Name = "新建笔记ToolStripMenuItem";
-            this.新建笔记ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.新建笔记ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.新建笔记ToolStripMenuItem.Text = "新建笔记";
             this.新建笔记ToolStripMenuItem.Click += new System.EventHandler(this.list_treeView_newNoteClick);
             // 
             // 导入ToolStripMenuItem1
             // 
             this.导入ToolStripMenuItem1.Name = "导入ToolStripMenuItem1";
-            this.导入ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.导入ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.导入ToolStripMenuItem1.Text = "导入笔记";
             this.导入ToolStripMenuItem1.Click += new System.EventHandler(this.list_treeView_importNotelick);
             // 
             // 导出ToolStripMenuItem1
             // 
             this.导出ToolStripMenuItem1.Name = "导出ToolStripMenuItem1";
-            this.导出ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.导出ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.导出ToolStripMenuItem1.Text = "导出";
             this.导出ToolStripMenuItem1.Click += new System.EventHandler(this.list_treeView_exportKBClick);
             // 
