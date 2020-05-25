@@ -332,52 +332,66 @@ namespace ONENOTE2
 
         private void fileinsert_toolStripButton_Click(object sender, EventArgs e)//插入文件的点击事件
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = false;                             //不允许多选
-            openFileDialog.Filter ="ALL Word Files|*.docx;*.pptx;*.dox";    //文件类型筛选
-            openFileDialog.Title = "请选择要插入的文档";                    
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = openFileDialog.FileName;
-               
-
-            }
+            insert("file");
         }
-
-        private void pictrueinsert_toolStripButton_Click(object sender, EventArgs e)       //插入图片的点击事件
+        private void insert(string type_name)
         {
             int index = note_tabControl.SelectedIndex;
             RichTextBox rtx = richTextBoxes.ElementAt(index);
             try
             {
-                OpenFileDialog P_OpenFileDialog = new OpenFileDialog();//创建打开文件对话框对象
-                P_OpenFileDialog.Filter = "*.jpg|*.jpg|*.bmp|*.bmp|*.png|*.png|*.ico|*.ico";//设置搜索的文件格式
-                DialogResult P_DialogResult = P_OpenFileDialog.ShowDialog();//弹出打开文件对话框
-                if (P_DialogResult == DialogResult.OK)//判断是否选中文件
+                OpenFileDialog P_OpenFileDialog = new OpenFileDialog();
+                if (type_name == "file")//判别类型名
                 {
-                    Clipboard.SetDataObject(Image.FromFile(P_OpenFileDialog.FileName), false);//将图像放入剪切板
-                    if (rtx.CanPaste(DataFormats.GetFormat(DataFormats.Bitmap)))//判断剪切板内是否是图像
+                    P_OpenFileDialog.Filter = "*.txt|*.txt|*.doc|*.docx|*.xls|*.xlsx|*.pptx|*.pptx|*.rtf|*.rtf";
+                }
+                else if (type_name == "music")
+                {
+                    P_OpenFileDialog.Filter = "*.cd|*.cd|*.mp3|*.mp3|*.wav|*.wav";
+                }
+                else if (type_name == "url")
+                {
+                    P_OpenFileDialog.Filter = "*.html|*.html|*.htm|*.htm";
+                }
+                else if (type_name == "picture")
+                {
+                    P_OpenFileDialog.Filter = "*.jpg|*.jpg|*.bmp|*.bmp|*.png|*.png|*.ico|*.ico";//设置搜索的文件格式
+                }
+
+                DialogResult P_DialogResult = P_OpenFileDialog.ShowDialog();
+                if (P_DialogResult == DialogResult.OK)
+                {
+                    if (type_name == "picture")
                     {
+                        Clipboard.SetDataObject(Image.FromFile(P_OpenFileDialog.FileName), false);//将图像放入剪切板
+                        if (rtx.CanPaste(DataFormats.GetFormat(DataFormats.Bitmap)))//判断剪切板内是否是图像
+                        {
+                            rtx.Paste();//粘贴剪切板的内容到控件中
+                            Clipboard.SetDataObject(String.Empty, false);//清空剪切板
+                        }
+                    }
+                    else
+                    {
+                        string filePath = @P_OpenFileDialog.FileName;
+                        System.Collections.Specialized.StringCollection strcoll = new System.Collections.Specialized.StringCollection();
+                        strcoll.Add(filePath);
+                        Clipboard.SetFileDropList(strcoll);
                         rtx.Paste();//粘贴剪切板的内容到控件中
                         Clipboard.SetDataObject(String.Empty, false);//清空剪切板
                     }
+
                 }
             }
             catch { }
         }
+        private void pictrueinsert_toolStripButton_Click(object sender, EventArgs e)       //插入图片的点击事件
+        {
+            insert("picture");
+        }
 
         private void musicinsert_toolStripButton_Click(object sender, EventArgs e)//插入图片的
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = false;                             //不允许多选
-            openFileDialog.Filter = "ALL Word Files|*.mp3;*.wma;*.avi;*.rm*.rmvb;*.flv;*.mpg*.mov;*.mkv";    //图片类型筛选
-            openFileDialog.Title = "请选择要插入的音频";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = openFileDialog.FileName;
-
-
-            }
+            insert("music");
         }
         public TreeNode addRootNode(String treename)               //增加一个知识库节点，参数为知识库名称  
         {
@@ -411,8 +425,9 @@ namespace ONENOTE2
                 
         private void urlinsert_toolStripButton_Click(object sender, EventArgs e)//插入链接的点击事件
         {
-            UrlForm urlForm = new UrlForm();
-            urlForm.ShowDialog();
+            //UrlForm urlForm = new UrlForm();
+            //urlForm.ShowDialog();
+            insert("url");
 
         }
 
@@ -631,6 +646,11 @@ namespace ONENOTE2
                     }
                 }
             }
+        }
+
+        private void start_toolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
 
         #endregion

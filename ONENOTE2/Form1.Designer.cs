@@ -92,8 +92,8 @@
             this.nextOperation_ToolStripMenuItem});
             this.top_menuStrip.Location = new System.Drawing.Point(0, 0);
             this.top_menuStrip.Name = "top_menuStrip";
-            this.top_menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.top_menuStrip.Size = new System.Drawing.Size(862, 25);
+            this.top_menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.top_menuStrip.Size = new System.Drawing.Size(1149, 28);
             this.top_menuStrip.TabIndex = 0;
             this.top_menuStrip.Text = "menuStrip1";
             // 
@@ -104,45 +104,45 @@
             this.导出ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.file_ToolStripMenuItem.Name = "file_ToolStripMenuItem";
-            this.file_ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.file_ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.file_ToolStripMenuItem.Text = "文件";
             // 
             // 导入ToolStripMenuItem
             // 
             this.导入ToolStripMenuItem.Name = "导入ToolStripMenuItem";
-            this.导入ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.导入ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.导入ToolStripMenuItem.Text = "导入";
             // 
             // 导出ToolStripMenuItem
             // 
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.导出ToolStripMenuItem.Text = "导出";
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
             // save_ToolStripMenuItem
             // 
             this.save_ToolStripMenuItem.Name = "save_ToolStripMenuItem";
-            this.save_ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.save_ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.save_ToolStripMenuItem.Text = "保存";
             this.save_ToolStripMenuItem.Click += new System.EventHandler(this.save_ToolStripMenuItem_Click);
             // 
             // lastOperation_ToolStripMenuItem
             // 
             this.lastOperation_ToolStripMenuItem.Name = "lastOperation_ToolStripMenuItem";
-            this.lastOperation_ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.lastOperation_ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.lastOperation_ToolStripMenuItem.Text = "撤销";
             this.lastOperation_ToolStripMenuItem.Click += new System.EventHandler(this.lastOperation_ToolStripMenuItem_Click);
             // 
             // nextOperation_ToolStripMenuItem
             // 
             this.nextOperation_ToolStripMenuItem.Name = "nextOperation_ToolStripMenuItem";
-            this.nextOperation_ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.nextOperation_ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.nextOperation_ToolStripMenuItem.Text = "重做";
             this.nextOperation_ToolStripMenuItem.Click += new System.EventHandler(this.nextOperation_ToolStripMenuItem_Click);
             // 
@@ -151,20 +151,21 @@
             this.menu_tabControl.Controls.Add(this.start_tabpage);
             this.menu_tabControl.Controls.Add(this.insert_tabPage);
             this.menu_tabControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.menu_tabControl.Location = new System.Drawing.Point(0, 25);
-            this.menu_tabControl.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.menu_tabControl.Location = new System.Drawing.Point(0, 28);
+            this.menu_tabControl.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
             this.menu_tabControl.Name = "menu_tabControl";
             this.menu_tabControl.SelectedIndex = 0;
-            this.menu_tabControl.Size = new System.Drawing.Size(862, 59);
+            this.menu_tabControl.Size = new System.Drawing.Size(1149, 74);
             this.menu_tabControl.TabIndex = 1;
             // 
             // start_tabpage
             // 
             this.start_tabpage.Controls.Add(this.insert_toolStrip);
-            this.start_tabpage.Location = new System.Drawing.Point(4, 22);
+            this.start_tabpage.Location = new System.Drawing.Point(4, 25);
+            this.start_tabpage.Margin = new System.Windows.Forms.Padding(4);
             this.start_tabpage.Name = "start_tabpage";
-            this.start_tabpage.Padding = new System.Windows.Forms.Padding(3);
-            this.start_tabpage.Size = new System.Drawing.Size(854, 33);
+            this.start_tabpage.Padding = new System.Windows.Forms.Padding(4);
+            this.start_tabpage.Size = new System.Drawing.Size(1141, 45);
             this.start_tabpage.TabIndex = 0;
             this.start_tabpage.Text = "开始";
             this.start_tabpage.UseVisualStyleBackColor = true;
@@ -180,11 +181,11 @@
             this.inclines_toolStripButton,
             this.underline_toolStripButton,
             this.fontcolor_toolStripButton});
-            this.insert_toolStrip.Location = new System.Drawing.Point(3, 3);
-            this.insert_toolStrip.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.insert_toolStrip.Location = new System.Drawing.Point(4, 4);
+            this.insert_toolStrip.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.insert_toolStrip.Name = "insert_toolStrip";
-            this.insert_toolStrip.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.insert_toolStrip.Size = new System.Drawing.Size(848, 29);
+            this.insert_toolStrip.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.insert_toolStrip.Size = new System.Drawing.Size(1133, 29);
             this.insert_toolStrip.TabIndex = 0;
             this.insert_toolStrip.Text = "toolStrip2";
             // 
@@ -196,7 +197,7 @@
             "黑体"});
             this.font_toolStripComboBox.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.font_toolStripComboBox.Name = "font_toolStripComboBox";
-            this.font_toolStripComboBox.Size = new System.Drawing.Size(80, 29);
+            this.font_toolStripComboBox.Size = new System.Drawing.Size(105, 29);
             this.font_toolStripComboBox.Text = "宋体";
             this.font_toolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.font_toolStripComboBox_SelectedIndexChanged);
             // 
@@ -219,7 +220,7 @@
             "24"});
             this.fontsize_toolStripComboBox.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.fontsize_toolStripComboBox.Name = "fontsize_toolStripComboBox";
-            this.fontsize_toolStripComboBox.Size = new System.Drawing.Size(80, 29);
+            this.fontsize_toolStripComboBox.Size = new System.Drawing.Size(105, 29);
             this.fontsize_toolStripComboBox.Text = "11";
             this.fontsize_toolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.fontsize_toolStripComboBox_SelectedIndexChanged);
             // 
@@ -264,7 +265,7 @@
             this.fontcolor_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fontcolor_toolStripButton.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.fontcolor_toolStripButton.Name = "fontcolor_toolStripButton";
-            this.fontcolor_toolStripButton.Size = new System.Drawing.Size(23, 29);
+            this.fontcolor_toolStripButton.Size = new System.Drawing.Size(29, 29);
             this.fontcolor_toolStripButton.Text = "A";
             this.fontcolor_toolStripButton.ToolTipText = "字体颜色";
             this.fontcolor_toolStripButton.Click += new System.EventHandler(this.fontcolor_toolStripButton_Click);
@@ -272,10 +273,11 @@
             // insert_tabPage
             // 
             this.insert_tabPage.Controls.Add(this.start_toolStrip);
-            this.insert_tabPage.Location = new System.Drawing.Point(4, 22);
+            this.insert_tabPage.Location = new System.Drawing.Point(4, 25);
+            this.insert_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.insert_tabPage.Name = "insert_tabPage";
-            this.insert_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.insert_tabPage.Size = new System.Drawing.Size(854, 33);
+            this.insert_tabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.insert_tabPage.Size = new System.Drawing.Size(1141, 45);
             this.insert_tabPage.TabIndex = 1;
             this.insert_tabPage.Text = "插入";
             this.insert_tabPage.UseVisualStyleBackColor = true;
@@ -288,12 +290,13 @@
             this.fileinsret_toolStripButton,
             this.musicinsert_toolStripButton,
             this.urlinsert_toolStripButton});
-            this.start_toolStrip.Location = new System.Drawing.Point(3, 3);
-            this.start_toolStrip.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.start_toolStrip.Location = new System.Drawing.Point(4, 4);
+            this.start_toolStrip.Margin = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.start_toolStrip.Name = "start_toolStrip";
-            this.start_toolStrip.Size = new System.Drawing.Size(848, 27);
+            this.start_toolStrip.Size = new System.Drawing.Size(1133, 27);
             this.start_toolStrip.TabIndex = 0;
             this.start_toolStrip.Text = "toolStrip1";
+            this.start_toolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.start_toolStrip_ItemClicked);
             // 
             // pictureinsert_toolStripButton
             // 
@@ -345,11 +348,11 @@
             this.left_tabControl.Controls.Add(this.history_tabPage);
             this.left_tabControl.Dock = System.Windows.Forms.DockStyle.Left;
             this.left_tabControl.ItemSize = new System.Drawing.Size(59, 20);
-            this.left_tabControl.Location = new System.Drawing.Point(0, 84);
-            this.left_tabControl.Margin = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.left_tabControl.Location = new System.Drawing.Point(0, 102);
+            this.left_tabControl.Margin = new System.Windows.Forms.Padding(3, 2, 0, 0);
             this.left_tabControl.Name = "left_tabControl";
             this.left_tabControl.SelectedIndex = 0;
-            this.left_tabControl.Size = new System.Drawing.Size(180, 344);
+            this.left_tabControl.Size = new System.Drawing.Size(240, 433);
             this.left_tabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.left_tabControl.TabIndex = 2;
             // 
@@ -357,9 +360,10 @@
             // 
             this.contents_tabPage.Controls.Add(this.list_treeView);
             this.contents_tabPage.Location = new System.Drawing.Point(4, 24);
+            this.contents_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.contents_tabPage.Name = "contents_tabPage";
-            this.contents_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.contents_tabPage.Size = new System.Drawing.Size(172, 316);
+            this.contents_tabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.contents_tabPage.Size = new System.Drawing.Size(232, 405);
             this.contents_tabPage.TabIndex = 0;
             this.contents_tabPage.Text = "目录";
             this.contents_tabPage.UseVisualStyleBackColor = true;
@@ -367,9 +371,10 @@
             // list_treeView
             // 
             this.list_treeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.list_treeView.Location = new System.Drawing.Point(3, 3);
+            this.list_treeView.Location = new System.Drawing.Point(4, 4);
+            this.list_treeView.Margin = new System.Windows.Forms.Padding(4);
             this.list_treeView.Name = "list_treeView";
-            this.list_treeView.Size = new System.Drawing.Size(166, 310);
+            this.list_treeView.Size = new System.Drawing.Size(224, 397);
             this.list_treeView.TabIndex = 0;
             this.list_treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.list_treeView_NodeMouseClick);
             this.list_treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.list_treeView_MouseDoubleClick);
@@ -378,9 +383,10 @@
             // search_tabPage
             // 
             this.search_tabPage.Location = new System.Drawing.Point(4, 24);
+            this.search_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.search_tabPage.Name = "search_tabPage";
-            this.search_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.search_tabPage.Size = new System.Drawing.Size(172, 316);
+            this.search_tabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.search_tabPage.Size = new System.Drawing.Size(232, 405);
             this.search_tabPage.TabIndex = 1;
             this.search_tabPage.Text = "搜索";
             this.search_tabPage.UseVisualStyleBackColor = true;
@@ -388,9 +394,10 @@
             // history_tabPage
             // 
             this.history_tabPage.Location = new System.Drawing.Point(4, 24);
+            this.history_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.history_tabPage.Name = "history_tabPage";
-            this.history_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.history_tabPage.Size = new System.Drawing.Size(172, 316);
+            this.history_tabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.history_tabPage.Size = new System.Drawing.Size(232, 405);
             this.history_tabPage.TabIndex = 2;
             this.history_tabPage.Text = "历史";
             this.history_tabPage.UseVisualStyleBackColor = true;
@@ -398,12 +405,12 @@
             // note_tabControl
             // 
             this.note_tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.note_tabControl.Location = new System.Drawing.Point(180, 84);
-            this.note_tabControl.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
-            this.note_tabControl.MinimumSize = new System.Drawing.Size(400, 350);
+            this.note_tabControl.Location = new System.Drawing.Point(240, 102);
+            this.note_tabControl.Margin = new System.Windows.Forms.Padding(0, 4, 4, 0);
+            this.note_tabControl.MinimumSize = new System.Drawing.Size(533, 438);
             this.note_tabControl.Name = "note_tabControl";
             this.note_tabControl.SelectedIndex = 0;
-            this.note_tabControl.Size = new System.Drawing.Size(682, 350);
+            this.note_tabControl.Size = new System.Drawing.Size(909, 438);
             this.note_tabControl.TabIndex = 3;
             // 
             // folderBrowserDialog1
@@ -418,26 +425,26 @@
             this.导入ToolStripMenuItem1,
             this.导出ToolStripMenuItem1});
             this.knowbank_contextMenuStrip.Name = "knowbank_contextMenuStrip";
-            this.knowbank_contextMenuStrip.Size = new System.Drawing.Size(125, 70);
+            this.knowbank_contextMenuStrip.Size = new System.Drawing.Size(139, 76);
             // 
             // 新建笔记ToolStripMenuItem
             // 
             this.新建笔记ToolStripMenuItem.Name = "新建笔记ToolStripMenuItem";
-            this.新建笔记ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.新建笔记ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.新建笔记ToolStripMenuItem.Text = "新建笔记";
             this.新建笔记ToolStripMenuItem.Click += new System.EventHandler(this.list_treeView_newNoteClick);
             // 
             // 导入ToolStripMenuItem1
             // 
             this.导入ToolStripMenuItem1.Name = "导入ToolStripMenuItem1";
-            this.导入ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.导入ToolStripMenuItem1.Size = new System.Drawing.Size(138, 24);
             this.导入ToolStripMenuItem1.Text = "导入笔记";
             this.导入ToolStripMenuItem1.Click += new System.EventHandler(this.list_treeView_importNotelick);
             // 
             // 导出ToolStripMenuItem1
             // 
             this.导出ToolStripMenuItem1.Name = "导出ToolStripMenuItem1";
-            this.导出ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.导出ToolStripMenuItem1.Size = new System.Drawing.Size(138, 24);
             this.导出ToolStripMenuItem1.Text = "导出";
             this.导出ToolStripMenuItem1.Click += new System.EventHandler(this.list_treeView_exportKBClick);
             // 
@@ -447,12 +454,12 @@
             this.note_contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.导出ToolStripMenuItem2});
             this.note_contextMenuStrip.Name = "note_contextMenuStrip";
-            this.note_contextMenuStrip.Size = new System.Drawing.Size(101, 26);
+            this.note_contextMenuStrip.Size = new System.Drawing.Size(109, 28);
             // 
             // 导出ToolStripMenuItem2
             // 
             this.导出ToolStripMenuItem2.Name = "导出ToolStripMenuItem2";
-            this.导出ToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.导出ToolStripMenuItem2.Size = new System.Drawing.Size(108, 24);
             this.导出ToolStripMenuItem2.Text = "导出";
             this.导出ToolStripMenuItem2.Click += new System.EventHandler(this.list_treeView_exportNoteClick);
             // 
@@ -463,32 +470,33 @@
             this.新建知识库ToolStripMenuItem,
             this.导出知识库ToolStripMenuItem});
             this.blackContextMunuStrip.Name = "blackContextMunuStrip";
-            this.blackContextMunuStrip.Size = new System.Drawing.Size(137, 48);
+            this.blackContextMunuStrip.Size = new System.Drawing.Size(154, 52);
             // 
             // 新建知识库ToolStripMenuItem
             // 
             this.新建知识库ToolStripMenuItem.Name = "新建知识库ToolStripMenuItem";
-            this.新建知识库ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.新建知识库ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
             this.新建知识库ToolStripMenuItem.Text = "新建知识库";
             this.新建知识库ToolStripMenuItem.Click += new System.EventHandler(this.list_treeView_newKBCilck);
             // 
             // 导出知识库ToolStripMenuItem
             // 
             this.导出知识库ToolStripMenuItem.Name = "导出知识库ToolStripMenuItem";
-            this.导出知识库ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.导出知识库ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
             this.导出知识库ToolStripMenuItem.Text = "导入知识库";
             this.导出知识库ToolStripMenuItem.Click += new System.EventHandler(this.list_treeView_importKBClick);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 428);
+            this.ClientSize = new System.Drawing.Size(1149, 535);
             this.Controls.Add(this.note_tabControl);
             this.Controls.Add(this.left_tabControl);
             this.Controls.Add(this.menu_tabControl);
             this.Controls.Add(this.top_menuStrip);
             this.MainMenuStrip = this.top_menuStrip;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
