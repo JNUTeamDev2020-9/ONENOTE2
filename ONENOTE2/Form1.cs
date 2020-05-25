@@ -599,12 +599,16 @@ namespace ONENOTE2
                 int index = node.Index;
                 KnowledgeBase kb = KBM.getKB(index);
                 Note note;
-                if ((note =FileManagement.newNote(kb, nodeName))!=null)
+                try
                 {
-                    addSonNode(node, nodeName);
-                    OpenForm(nodeForm, nodeName);
-                    bindingNoteForm(nodeForm, note);
+                    if ((note = FileManagement.newNote(kb, nodeName)) != null)
+                    {
+                        addSonNode(node, nodeName);
+                        OpenForm(nodeForm, nodeName);
+                        bindingNoteForm(nodeForm, note);
+                    }
                 }
+                catch (Exception) { }
             }
         }
         private void newKB()
@@ -613,10 +617,14 @@ namespace ONENOTE2
             notepage.ShowDialog();
             if (!nodeName.Equals(""))
             {
-                if (FileManagement.newKB(KBM, nodeName))
+                try
                 {
+                    if (FileManagement.newKB(KBM, nodeName))
+                    {
                     updateTree();
+                    }
                 }
+                catch(Exception) { }
             }
 
         }
