@@ -14,6 +14,7 @@ namespace ONENOTE2
 
         public static Form1 form1;
         public static String nodeName;
+        const int CLOSE_SIZE = 15;//用于绘制选项卡关闭按钮
         public int len = 0;     //用于改变字体
         public int curRtbStart = 0;//用于改变字体
         Boolean boldbool = false,underlinebool=false, inclinesbool=false;//用于判断是否字体加粗还是取消加粗
@@ -651,6 +652,87 @@ namespace ONENOTE2
         private void start_toolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void note_tabControl_DrawItem(object sender, DrawItemEventArgs e)//重画选项卡按钮
+        {
+            try
+            {
+                //获取当前Tab选项卡的绘图区域
+                Rectangle myTabRect = this.note_tabControl.GetTabRect(e.Index);
+                //绘制标签头背景色
+                using (Brush brBack = new SolidBrush(Color.Yellow))
+                {
+                    if (e.Index == this.note_tabControl.SelectedIndex)
+                    {
+                        e.Graphics.FillRectangle(brBack, myTabRect); //设置当前选中的tabgage的背景色
+                    }
+                }
+                //先添加TabPage属性
+                e.Graphics.DrawString(this.note_tabControl.TabPages[e.Index].Text,
+                    this.Font, SystemBrushes.ControlText, myTabRect.X + 2, myTabRect.Y + 2);
+
+                //再画一个矩形框
+                using (Pen p = new Pen(Color.Transparent))
+                {
+                    myTabRect.Offset(myTabRect.Width - (CLOSE_SIZE + 3), 2);
+                    myTabRect.Width = CLOSE_SIZE;
+                    myTabRect.Height = CLOSE_SIZE;
+                    e.Graphics.DrawRectangle(p, myTabRect);
+                }
+                //填充矩形框
+                Color recColor = (e.State == DrawItemState.Selected) ? Color.Transparent : Color.Transparent;
+                using (Brush b = new SolidBrush(recColor))
+                {
+                    e.Graphics.FillRectangle(b, myTabRect);
+                }
+
+                //画Tab选项卡右上方关闭按钮   
+                using (Pen objpen = new Pen(Color.SlateBlue, 1.8f))
+                {
+                    //自己画X
+                    //"\"线
+                    Point p1 = new Point(myTabRect.X + 3, myTabRect.Y + 3);
+                    Point p2 = new Point(myTabRect.X + myTabRect.Width - 3, myTabRect.Y + myTabRect.Height - 3);
+                    e.Graphics.DrawLine(objpen, p1, p2);
+                    //"/"线
+                    Point p3 = new Point(myTabRect.X + 3, myTabRect.Y + myTabRect.Height - 3);
+                    Point p4 = new Point(myTabRect.X + myTabRect.Width - 3, myTabRect.Y + 3);
+                    e.Graphics.DrawLine(objpen, p3, p4);
+
+                    ////使用图片，可以自定义图片
+                    //Bitmap bt = new Bitmap(image);
+                    //Point p5 = new Point(myTabRect.X, 4);//获取绘图区域的开始坐标位置
+                    //e.Graphics.DrawImage(bt, p5);
+                }
+                e.Graphics.Dispose();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void note_tabControl_MouseDown(object sender, MouseEventArgs e)//选项卡按钮的关闭功能
+        {
+            if (!String.IsNullOrEmpty(this.note_tabControl.SelectedTab.Text))
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    int x = e.X, y = e.Y;
+                    //计算关闭区域      
+                    Rectangle myTabRect = this.note_tabControl.GetTabRect(this.note_tabControl.SelectedIndex); ;
+                    //myTabRect.Offset(myTabRect.Width - (CLOSE_SIZE + 3), 2);
+                    myTabRect.Offset(myTabRect.Width - 0x12, 2);
+                    myTabRect.Width = CLOSE_SIZE;
+                    myTabRect.Height = CLOSE_SIZE;
+                    //如果鼠标在区域内就关闭选项卡      
+                    bool isClose = x > myTabRect.X && x < myTabRect.Right && y > myTabRect.Y && y < myTabRect.Bottom;
+                    if (isClose == true)
+                    {
+                        this.note_tabControl.TabPages.Remove(this.note_tabControl.SelectedTab);
+                    }
+                }
+            }
         }
 
         #endregion
