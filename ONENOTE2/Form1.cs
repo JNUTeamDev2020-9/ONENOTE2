@@ -350,10 +350,6 @@ namespace ONENOTE2
                 {
                     P_OpenFileDialog.Filter = "*.cd|*.cd|*.mp3|*.mp3|*.wav|*.wav";
                 }
-                else if (type_name == "url")
-                {
-                    P_OpenFileDialog.Filter = "*.html|*.html|*.htm|*.htm";
-                }
                 else if (type_name == "picture")
                 {
                     P_OpenFileDialog.Filter = "*.jpg|*.jpg|*.bmp|*.bmp|*.png|*.png|*.ico|*.ico";//设置搜索的文件格式
@@ -426,10 +422,43 @@ namespace ONENOTE2
                 
         private void urlinsert_toolStripButton_Click(object sender, EventArgs e)//插入链接的点击事件
         {
-            //UrlForm urlForm = new UrlForm();
-            //urlForm.ShowDialog();
-            insert("url");
+            int index = note_tabControl.SelectedIndex;
+            RichTextBox rtx = richTextBoxes.ElementAt(index);
 
+            UrlForm urlForm = new UrlForm();
+            urlForm.ShowDialog();
+
+
+
+            String _fileUrl = urlForm.url_text;
+            String fileName = "";
+            if (_fileUrl != "")
+            {
+                if (_fileUrl.IndexOf("http://") != -1)
+                {
+                    fileName = _fileUrl;
+                }
+                else
+                {
+                    fileName = "http://" + _fileUrl;
+                }
+
+            }
+
+            rtx.AppendText(fileName);
+
+            rtx.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
+
+
+        }
+
+        public System.Diagnostics.Process p = new System.Diagnostics.Process();
+
+        private void richTextBox1_LinkClicked(object sender, System.Windows.Forms.LinkClickedEventArgs e)//点击链接执行
+        {
+            // Call Process.Start method to open a browser
+            // with link text as URL.
+            p = System.Diagnostics.Process.Start("IExplore.exe", e.LinkText);
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)

@@ -28,77 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.urlname_textBox = new System.Windows.Forms.TextBox();
             this.url_textBox = new System.Windows.Forms.TextBox();
-            this.urlname_label = new System.Windows.Forms.Label();
             this.url_label = new System.Windows.Forms.Label();
             this.urlok_button = new System.Windows.Forms.Button();
             this.urlcancel_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // urlname_textBox
-            // 
-            this.urlname_textBox.Location = new System.Drawing.Point(121, 46);
-            this.urlname_textBox.Name = "urlname_textBox";
-            this.urlname_textBox.Size = new System.Drawing.Size(100, 21);
-            this.urlname_textBox.TabIndex = 0;
-            // 
             // url_textBox
             // 
-            this.url_textBox.Location = new System.Drawing.Point(121, 125);
+            this.url_textBox.Location = new System.Drawing.Point(161, 156);
+            this.url_textBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.url_textBox.Name = "url_textBox";
-            this.url_textBox.Size = new System.Drawing.Size(100, 21);
+            this.url_textBox.Size = new System.Drawing.Size(132, 25);
             this.url_textBox.TabIndex = 1;
-            // 
-            // urlname_label
-            // 
-            this.urlname_label.AutoSize = true;
-            this.urlname_label.Location = new System.Drawing.Point(119, 19);
-            this.urlname_label.Name = "urlname_label";
-            this.urlname_label.Size = new System.Drawing.Size(89, 12);
-            this.urlname_label.TabIndex = 2;
-            this.urlname_label.Text = "请输入链接名称";
             // 
             // url_label
             // 
             this.url_label.AutoSize = true;
-            this.url_label.Location = new System.Drawing.Point(119, 92);
+            this.url_label.Location = new System.Drawing.Point(159, 115);
+            this.url_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.url_label.Name = "url_label";
-            this.url_label.Size = new System.Drawing.Size(65, 12);
+            this.url_label.Size = new System.Drawing.Size(82, 15);
             this.url_label.TabIndex = 3;
             this.url_label.Text = "请输入链接";
             // 
             // urlok_button
             // 
-            this.urlok_button.Location = new System.Drawing.Point(73, 185);
+            this.urlok_button.Location = new System.Drawing.Point(97, 231);
+            this.urlok_button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.urlok_button.Name = "urlok_button";
-            this.urlok_button.Size = new System.Drawing.Size(75, 23);
+            this.urlok_button.Size = new System.Drawing.Size(100, 29);
             this.urlok_button.TabIndex = 4;
-            this.urlok_button.Text = "button1";
+            this.urlok_button.Text = "确定";
             this.urlok_button.UseVisualStyleBackColor = true;
             this.urlok_button.Click += new System.EventHandler(this.urlok_button_Click);
             // 
             // urlcancel_button
             // 
-            this.urlcancel_button.Location = new System.Drawing.Point(231, 185);
+            this.urlcancel_button.Location = new System.Drawing.Point(308, 231);
+            this.urlcancel_button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.urlcancel_button.Name = "urlcancel_button";
-            this.urlcancel_button.Size = new System.Drawing.Size(75, 23);
+            this.urlcancel_button.Size = new System.Drawing.Size(100, 29);
             this.urlcancel_button.TabIndex = 5;
-            this.urlcancel_button.Text = "button2";
+            this.urlcancel_button.Text = "取消";
             this.urlcancel_button.UseVisualStyleBackColor = true;
             this.urlcancel_button.Click += new System.EventHandler(this.urlcancel_button_Click);
             // 
             // UrlForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 223);
+            this.ClientSize = new System.Drawing.Size(533, 279);
             this.Controls.Add(this.urlcancel_button);
             this.Controls.Add(this.urlok_button);
             this.Controls.Add(this.url_label);
-            this.Controls.Add(this.urlname_label);
             this.Controls.Add(this.url_textBox);
-            this.Controls.Add(this.urlname_textBox);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "UrlForm";
             this.Text = "插入链接";
             this.ResumeLayout(false);
@@ -107,10 +92,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox urlname_textBox;
         private System.Windows.Forms.TextBox url_textBox;
-        private System.Windows.Forms.Label urlname_label;
         private System.Windows.Forms.Label url_label;
         private System.Windows.Forms.Button urlok_button;
         private System.Windows.Forms.Button urlcancel_button;

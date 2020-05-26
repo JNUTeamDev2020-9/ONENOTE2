@@ -17,9 +17,11 @@ namespace ONENOTE2
             InitializeComponent();
         }
 
+        public string url_text = "";//存文本框内容
         private void urlok_button_Click(object sender, EventArgs e)//确认事件
         {
-            Close();
+            url_text = this.url_textBox.Text;
+            this.Close();
         }
 
         private void urlcancel_button_Click(object sender, EventArgs e)//取消事件
