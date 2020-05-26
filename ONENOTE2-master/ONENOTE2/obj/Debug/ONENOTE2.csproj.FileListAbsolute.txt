@@ -1,0 +1,13 @@
+G:\ONENOTE2-master\ONENOTE2\bin\Debug\ONENOTE2.exe.config
+G:\ONENOTE2-master\ONENOTE2\bin\Debug\ONENOTE2.exe
+G:\ONENOTE2-master\ONENOTE2\bin\Debug\ONENOTE2.pdb
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.csprojAssemblyReference.cache
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.Form1.resources
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.UrlForm.resources
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.NodeForm.resources
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.Tip.resources
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.Properties.Resources.resources
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.csproj.GenerateResource.cache
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.csproj.CoreCompileInputs.cache
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.exe
+G:\ONENOTE2-master\ONENOTE2\obj\Debug\ONENOTE2.pdb
