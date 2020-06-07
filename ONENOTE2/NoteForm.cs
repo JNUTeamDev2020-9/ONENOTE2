@@ -13,6 +13,7 @@ namespace ONENOTE2
     public partial class NodeForm : Form
     {
         public static NodeForm nodeForm;
+        
         public NodeForm()
         {
             InitializeComponent();
@@ -21,19 +22,23 @@ namespace ONENOTE2
 
         public static void NoteRedo()
         {
-            RichTextBox currentNote = nodeForm.edit_richTextBox;
-            if (currentNote.CanRedo)
-            {
-                currentNote.Redo();
+            if (null != nodeForm) {
+                RichTextBox currentNote = nodeForm.edit_richTextBox;
+                if (currentNote.CanRedo)
+                {
+                    currentNote.Redo();
+                }
             }
         }
 
         public static void NoteUndo()
         {
-            RichTextBox currentNote = nodeForm.edit_richTextBox;
-            if (currentNote.CanUndo)
-            {
-                currentNote.Undo();
+            if (null != nodeForm) {
+                RichTextBox currentNote = nodeForm.edit_richTextBox;
+                if (currentNote.CanUndo)
+                {
+                    currentNote.Undo();
+                }
             }
         }
 

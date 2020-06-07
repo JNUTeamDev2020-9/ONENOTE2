@@ -162,9 +162,9 @@
             // 
             this.start_tabpage.Controls.Add(this.insert_toolStrip);
             this.start_tabpage.Location = new System.Drawing.Point(4, 25);
-            this.start_tabpage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.start_tabpage.Margin = new System.Windows.Forms.Padding(4);
             this.start_tabpage.Name = "start_tabpage";
-            this.start_tabpage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.start_tabpage.Padding = new System.Windows.Forms.Padding(4);
             this.start_tabpage.Size = new System.Drawing.Size(1141, 45);
             this.start_tabpage.TabIndex = 0;
             this.start_tabpage.Text = "开始";
@@ -274,9 +274,9 @@
             // 
             this.insert_tabPage.Controls.Add(this.start_toolStrip);
             this.insert_tabPage.Location = new System.Drawing.Point(4, 25);
-            this.insert_tabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.insert_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.insert_tabPage.Name = "insert_tabPage";
-            this.insert_tabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.insert_tabPage.Padding = new System.Windows.Forms.Padding(4);
             this.insert_tabPage.Size = new System.Drawing.Size(1141, 45);
             this.insert_tabPage.TabIndex = 1;
             this.insert_tabPage.Text = "插入";
@@ -296,7 +296,6 @@
             this.start_toolStrip.Size = new System.Drawing.Size(1133, 27);
             this.start_toolStrip.TabIndex = 0;
             this.start_toolStrip.Text = "toolStrip1";
-            this.start_toolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.start_toolStrip_ItemClicked);
             // 
             // pictureinsert_toolStripButton
             // 
@@ -360,9 +359,9 @@
             // 
             this.contents_tabPage.Controls.Add(this.list_treeView);
             this.contents_tabPage.Location = new System.Drawing.Point(4, 24);
-            this.contents_tabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.contents_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.contents_tabPage.Name = "contents_tabPage";
-            this.contents_tabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.contents_tabPage.Padding = new System.Windows.Forms.Padding(4);
             this.contents_tabPage.Size = new System.Drawing.Size(232, 405);
             this.contents_tabPage.TabIndex = 0;
             this.contents_tabPage.Text = "目录";
@@ -372,21 +371,20 @@
             // 
             this.list_treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.list_treeView.Location = new System.Drawing.Point(4, 4);
-            this.list_treeView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.list_treeView.Margin = new System.Windows.Forms.Padding(4);
             this.list_treeView.Name = "list_treeView";
             this.list_treeView.Size = new System.Drawing.Size(224, 397);
             this.list_treeView.TabIndex = 0;
-            this.list_treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.list_treeView_NodeMouseClick);
             this.list_treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.list_treeView_MouseDoubleClick);
             this.list_treeView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.list_treeView_MouseDown);
             // 
             // search_tabPage
             // 
             this.search_tabPage.Location = new System.Drawing.Point(4, 24);
-            this.search_tabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.search_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.search_tabPage.Name = "search_tabPage";
-            this.search_tabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.search_tabPage.Size = new System.Drawing.Size(232, 402);
+            this.search_tabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.search_tabPage.Size = new System.Drawing.Size(232, 405);
             this.search_tabPage.TabIndex = 1;
             this.search_tabPage.Text = "搜索";
             this.search_tabPage.UseVisualStyleBackColor = true;
@@ -394,10 +392,10 @@
             // history_tabPage
             // 
             this.history_tabPage.Location = new System.Drawing.Point(4, 24);
-            this.history_tabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.history_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.history_tabPage.Name = "history_tabPage";
-            this.history_tabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.history_tabPage.Size = new System.Drawing.Size(232, 402);
+            this.history_tabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.history_tabPage.Size = new System.Drawing.Size(232, 405);
             this.history_tabPage.TabIndex = 2;
             this.history_tabPage.Text = "历史";
             this.history_tabPage.UseVisualStyleBackColor = true;
@@ -416,10 +414,6 @@
             this.note_tabControl.TabIndex = 3;
             this.note_tabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.note_tabControl_DrawItem);
             this.note_tabControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.note_tabControl_MouseDown);
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
             // 
             // knowbank_contextMenuStrip
             // 
@@ -500,7 +494,7 @@
             this.Controls.Add(this.menu_tabControl);
             this.Controls.Add(this.top_menuStrip);
             this.MainMenuStrip = this.top_menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
