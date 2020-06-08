@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SQLiteDemo;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
 
 namespace ONENOTE2
@@ -15,7 +17,8 @@ namespace ONENOTE2
         public static Form1 form1;
         public static String nodeName;
         const int CLOSE_SIZE = 15;//用于绘制选项卡关闭按钮
-
+        NoteDatabase noteDatabase; //新的数据库
+        List<KnowledgeBase> KBS; //新的知识库列表
         #endregion
 
         #region 构造方法与加载
@@ -30,18 +33,39 @@ namespace ONENOTE2
         {
             list_treeView.LabelEdit = true;        //树目录为可编辑状态
             loadTreeView();
+            list_treeView.ExpandAll();
+
         }
         private void loadTreeView() //加载树目录
         {
-            KBM = FileManagement.loadKnowledgeBaseManagement(); //首先获取数据
-            List<KnowledgeBase> kbs = KBM.getKBS();
-            foreach (KnowledgeBase kb in kbs)
+            
+            noteDatabase = new NoteDatabase();
+            KBS = noteDatabase.FetchKnowledgeBase();
+            if (0 == KBS.Count) {
+                //默认
+                KnowledgeBase kb1 = new KnowledgeBase { Name = "默认知识库" };
+                Note note = new Note
+                {
+                    Title = "默认笔记页",
+                    Content = "",
+                    Directory = "默认知识库"
+                };
+                noteDatabase.AddKnowledgeBase(kb1);
+                
+                noteDatabase.AddNote(note);
+
+               
+                KBS = noteDatabase.FetchKnowledgeBase();
+
+            }
+            
+            foreach (KnowledgeBase kb in KBS)
             {
-                TreeNode treeNode = addRootNode(kb.getName());
-                List<Note> notes = kb.GetNotes();
+                TreeNode treeNode = addRootNode(kb.Name);
+                List<Note> notes = noteDatabase.FetchNote(kb.Name);
                 foreach (Note note in notes)
                 {
-                    addSonNode(treeNode, note.getName());
+                    addSonNode(treeNode, note.Title);
 
                 }
             }
@@ -444,7 +468,9 @@ namespace ONENOTE2
             if (index >= 0) { //检查有没有选中的文本框
                 RichTextBox rtx = richTextBoxes.ElementAt(index);
                 Note note = noteList.ElementAt(index);
-                rtx.SaveFile(note.getRecordLocation(), RichTextBoxStreamType.RichText);
+                note.Content = rtx.Rtf;
+                noteDatabase.UpdateNote(note);
+                
             }
         }
 
@@ -600,7 +626,7 @@ namespace ONENOTE2
         #region 笔记页和知识库
 
         #region 相关数据
-        KonwledgeBaseManagement KBM;
+        
         List<RichTextBox> richTextBoxes = new List<RichTextBox>(); //当前页面的所有编辑框
         List<Note> noteList = new List<Note>(); //和当前页面的编辑框绑定的笔记页
         #endregion
@@ -623,19 +649,24 @@ namespace ONENOTE2
                 ClosePreForm();//嵌入窗体前判断当前容器中是否有窗口没关掉
                 NodeForm nodeForm = new NodeForm();
                 nodeForm.edit_richTextBox.Dock = DockStyle.Fill;    //设置富文本框的填充
-                int index = node.Index;
-                KnowledgeBase kb = KBM.getKB(index);
-                Note note;
-                try
-                {
-                    if ((note = FileManagement.newNote(kb, nodeName)) != null)
+                String KBName = GetSelectedKnowledgeBaseName();
+                if (null != KBName) {
+                    Note note = new Note
                     {
-                        addSonNode(node, nodeName);
-                        OpenForm(nodeForm, nodeName);
-                        bindingNoteForm(nodeForm, note);
-                    }
+                        Title = nodeName,
+                        Content = "",
+                        Directory = KBName
+                    };
+                    noteDatabase.AddNote(note);
+                    
+                    addSonNode(node, nodeName);
+                    updateTree();
+                    OpenForm(nodeForm, nodeName);
+                    bindingNoteForm(nodeForm, note);
                 }
-                catch (Exception) { }
+                
+                
+
             }
         }
 
@@ -648,14 +679,9 @@ namespace ONENOTE2
             notepage.ShowDialog();
             if (!nodeName.Equals(""))
             {
-                try
-                {
-                    if (FileManagement.newKB(KBM, nodeName))
-                    {
-                        updateTree();
-                    }
-                }
-                catch (Exception) { }
+                KnowledgeBase kb = new KnowledgeBase { Name = nodeName };
+                noteDatabase.AddKnowledgeBase(kb);
+                updateTree();
             }
 
         }
@@ -689,15 +715,103 @@ namespace ONENOTE2
         /// </summary>
         private void importNote()
         {
-            TreeNode node;
-            if ((node = list_treeView.SelectedNode) != null)
-            {
-                int index = node.Index;
-                KnowledgeBase kb = KBM.getKB(index);
-                FileManagement.importNoteDialog(KBM, kb);
-                updateTree();
+            String KBName = GetSelectedKnowledgeBaseName();
+            if (null != KBName) {
+                String[] fileNames = showOpenFileDialog();
+                for (int i = 0; i < fileNames.Length; i++)
+                {
+                    importNote(KBName, fileNames[i]);
+                    updateTree();
+                }
             }
+            
 
+        }
+
+        /// <summary>
+        /// 由importNote和importKB调用
+        /// </summary>
+        /// <param name="KBname"></param>
+        /// <param name="NotefileName"></param>
+        private void importNote(String KBname,String NotefileName) {
+            RichTextBox richTextBox = new RichTextBox();
+            richTextBox.LoadFile(NotefileName);
+            Note note = new Note
+            {
+                Content = richTextBox.Rtf,
+                Title = Note.GetTitleFromFileName(NotefileName),
+                Directory = GetKBNameFromFile(KBname)
+            };
+            noteDatabase.AddNote(note);
+        }
+
+        /// <summary>
+        /// 从文件名中裁剪出正确的知识库名称
+        /// </summary>
+        /// <param name="KBFilename"></param>
+        /// <returns></returns>
+        private String GetKBNameFromFile(String KBFilename)
+        {
+            int index = KBFilename.LastIndexOf('\\');
+            if (index > 0) {
+                return KBFilename.Substring(index + 1, KBFilename.Length - index - 1);
+            }
+            return KBFilename;
+        }
+        
+        /// <summary>
+        /// 获取树目录选中的知识库名称
+        /// </summary>
+        /// <returns></returns>
+        private String GetSelectedKnowledgeBaseName() {
+            TreeNode node = list_treeView.SelectedNode;
+            if (null != node)
+            {
+                if (1 == node.Level)
+                {
+                    ClosePreForm();//嵌入窗体前判断当前容器中是否有窗口没关掉
+
+                    NodeForm nodeForm = new NodeForm();
+                    nodeForm.edit_richTextBox.Dock = DockStyle.Fill;    //将富文本框设置为自动适应
+                    int index = node.Index;
+                    TreeNode prant = node.Parent;
+                    return prant.Text;
+                }
+                if (0 == node.Level) {
+                    return node.Text;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// GUI代码 分割
+        /// 显示文件浏览器并获取用户选择
+        /// </summary>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        private static String showFolderBrowserDialog(String description)
+        {
+            try
+            {
+                // 新建文件浏览器对话
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+                // 设置对话框的描述
+                dialog.Description = description;
+
+                // 返回用户的选择
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    return dialog.SelectedPath;
+                }
+                return null;
+            }
+            catch
+            {
+                MessageBox.Show("文件夹选择器打开失败");
+                return null;
+            }
         }
 
         /// <summary>
@@ -705,8 +819,22 @@ namespace ONENOTE2
         /// </summary>
         private void importKB()
         {
-            FileManagement.importKBDialog(KBM);
+            String floderName = showFolderBrowserDialog("导入知识库");
+            String KBName = GetKBNameFromFile(floderName);
+            KnowledgeBase kb = new KnowledgeBase() { Name = KBName };
+            noteDatabase.AddKnowledgeBase(kb);  //添加好知识库
+
+            // 将该路径中所有符合格式（.rtf）的文件都添加到该知识库中作为笔记页
+            DirectoryInfo TheFolder = new DirectoryInfo(floderName);
+            foreach (FileInfo fi in TheFolder.GetFiles())
+            {
+                if (fi.Name.EndsWith(Note.GetNoteFormat()))
+                {
+                    importNote(floderName, floderName+@"\"+fi.Name);
+                }
+            }
             updateTree();
+
         }
 
         /// <summary>
@@ -740,6 +868,7 @@ namespace ONENOTE2
         /// </summary>
         private void exportNote()
         {
+            
             TreeNode node = list_treeView.SelectedNode;
             if (null != node)
             {
@@ -748,22 +877,90 @@ namespace ONENOTE2
                     int index = node.Index;
                     TreeNode prant = node.Parent;
                     int ip = prant.Index;
-                    Note note = KBM.getKB(ip).getNote(index);
-                    FileManagement.exportNote(note);
+                    Note note = noteDatabase.FetchNote(node.Parent.Text, node.Text);
+                    // 选择导出笔记的目标文件夹
+                    String selectedPath = showFolderBrowserDialog("导出笔记");
+                    exportNote(selectedPath,note);
                 }
             }
         }
 
         /// <summary>
-        /// 导出笔记
+        /// 导出笔记 由exportNote和exportKB调用
+        /// </summary>
+        /// <param name="note"></param>
+        private void exportNote(String selectedPath,Note note)
+        {
+            
+            // 获取目标路径
+            String filePath = selectedPath + @"\" + note.Title + Note.GetNoteFormat();
+
+            // 若该路径中存在同名的笔记页文件，进行提示
+            if (File.Exists(filePath))
+            {
+                // 提示信息错误
+                int answer = (int)MessageBox.Show("知识库中已有名为" + note.Title+ "的文件，是否替换", "替换提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                if (6 == answer)//返回值 是6 否7 取消2
+                {
+                    File.Delete(filePath);
+                    RichTextBox richTextBox = new RichTextBox();
+                    richTextBox.Rtf = note.Content;
+                    richTextBox.SaveFile(filePath, RichTextBoxStreamType.RichText);
+                }
+            }
+            // 若不存在同名，复制该笔记页文件到目标文件夹
+            else
+            {
+                File.Delete(filePath);
+                RichTextBox richTextBox = new RichTextBox();
+                richTextBox.Rtf = note.Content;
+                richTextBox.SaveFile(filePath, RichTextBoxStreamType.RichText);
+            }
+        }
+
+
+        private void exportKB(String KBName) {
+            // 创建文件夹浏览器并获得导出目标路径
+            String selectedPath = showFolderBrowserDialog("导出笔记");
+            String directoryPath = selectedPath + @"\" + KBName;
+
+            // 若该路径下存在与该知识库同名的文件夹，询问是否替换
+            if (Directory.Exists(directoryPath))
+            {
+                int answer = (int)MessageBox.Show("文件夹中已有名为" + KBName + "的文件夹，是否替换", "替换提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                if (6 == answer)//返回值 是6 否7 取消2
+                {
+                    Directory.Delete(directoryPath);
+                    Directory.CreateDirectory(directoryPath);
+                    List<Note> notes = noteDatabase.FetchNote(KBName);
+                    for (int i = 0; i < notes.Count; i++) {
+                        exportNote(directoryPath, notes.ElementAt(i));
+                    }
+                }
+            }
+            // 若不存在，则复制知识库对应的文件夹到目标文件夹
+            else
+            {
+                Directory.CreateDirectory(directoryPath);
+                List<Note> notes = noteDatabase.FetchNote(KBName);
+                for (int i = 0; i < notes.Count; i++)
+                {
+                    exportNote(directoryPath, notes.ElementAt(i));
+                }
+            }
+        }
+        /// <summary>
+        /// 导出知识库
         /// </summary>
         private void exportKB()
         {
+            
             TreeNode node;
             if ((node = list_treeView.SelectedNode) != null)
             {
-                int index = node.Index;
-                FileManagement.exportKB(KBM.getKB(index));
+                if (0 == node.Level) { //知识库
+                    exportKB(node.Text);
+                }
             }
         }
 
@@ -938,9 +1135,10 @@ namespace ONENOTE2
                     TreeNode prant = node.Parent;
                     int ip = prant.Index;
                     //MessageBox.Show("" + index+"-"+ip);
-                    Note note = KBM.getKB(ip).getNote(index);
+                    Note note = noteDatabase.FetchNote(KBS.ElementAt(ip).Name).ElementAt(index);
+                    
                     bindingNoteForm(nodeForm, note);
-                    OpenForm(nodeForm, note.getName());
+                    OpenForm(nodeForm, note.Title);
                     showNote(nodeForm, note);
                     //MessageBox.Show("" + note.getRecordLocation());
                 }
@@ -955,14 +1153,7 @@ namespace ONENOTE2
         /// <param name="note"></param>
         private void showNote(NodeForm nodeForm, Note note)
         {
-            if (File.Exists(note.getRecordLocation()))
-            {
-                nodeForm.edit_richTextBox.LoadFile(note.getRecordLocation(), RichTextBoxStreamType.RichText);
-            }
-            else
-            {
-                MessageBox.Show("文件不存在");
-            }
+            nodeForm.edit_richTextBox.Rtf = note.Content;
 
         }
         
@@ -972,18 +1163,55 @@ namespace ONENOTE2
         private void updateTree()
         {
             list_treeView.Nodes.Clear();
-            List<KnowledgeBase> kbs = KBM.getKBS();
-            foreach (KnowledgeBase kb in kbs)
+            KBS = noteDatabase.FetchKnowledgeBase();
+            foreach (KnowledgeBase kb in KBS)
             {
-                TreeNode treeNode = addRootNode(kb.getName());
+                TreeNode treeNode = addRootNode(kb.Name);
                 List<Note> notes;
-                if ((notes = kb.GetNotes()) != null)
+                if ((notes = noteDatabase.FetchNote(kb.Name)) != null)
                 {
                     foreach (Note note in notes)
                     {
-                        addSonNode(treeNode, note.getName());
+                        addSonNode(treeNode, note.Title);
                     }
                 }
+            }
+            list_treeView.ExpandAll();
+        }
+
+
+        #endregion
+
+        #region 打开文件对话框（GUI控件）：用于导入笔记页
+        /// <summary>
+        /// GUI代码 分割
+        /// 创建新的打开文件对话框
+        /// </summary>
+        /// <returns></returns>
+        private static string[] showOpenFileDialog()
+        {
+            try
+            {
+                // 创建打开文件对话框
+                OpenFileDialog dialog = new OpenFileDialog();
+
+                // 设置搜索的文件格式
+                dialog.Filter = "*" + Note.GetNoteFormat() + "|*" + Note.GetNoteFormat();
+
+                // 启用多选
+                dialog.Multiselect = true;
+
+                // 返回用户的选择
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    return dialog.FileNames;
+                }
+                return null;
+            }
+            catch
+            {
+                MessageBox.Show("文件选择器打开失败");
+                return null;
             }
         }
         #endregion
@@ -1094,3 +1322,12 @@ namespace ONENOTE2
     #endregion
 
 }
+
+/*
+ * 加载
+ * 点击显示
+ * 保存
+ * 导入导出
+ * 
+ * 
+ */

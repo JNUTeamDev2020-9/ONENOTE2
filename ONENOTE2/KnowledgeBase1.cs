@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace ONENOTE2
 {
     [Serializable()]
-    class KnowledgeBase
+    class KnowledgeBase1
     {
         #region 成员数据
 
@@ -17,7 +17,7 @@ namespace ONENOTE2
         /// 知识库包含的笔记页
         /// </summary>
         // 
-        private List<Note> notes = new List<Note>();
+        private List<Note1> notes = new List<Note1>();
 
         /// <summary>
         /// 知识库对应的文件夹在文件系统中的路径
@@ -37,7 +37,7 @@ namespace ONENOTE2
         /// 构造方法：导入知识库
         /// </summary>
         /// <param name="recordLocation"></param>
-        public KnowledgeBase(String recordLocation)
+        public KnowledgeBase1(String recordLocation)
         {
             //知识库在文件系统中的路径
             this.recordLocation = recordLocation;
@@ -52,7 +52,7 @@ namespace ONENOTE2
         /// </summary>
         /// <param name="recordLocation"></param>
         /// <param name="name"></param>
-        public KnowledgeBase(String recordLocation,String name)
+        public KnowledgeBase1(String recordLocation,String name)
         {
             //知识库在文件系统中的路径
             this.recordLocation = recordLocation + @"\" + name;
@@ -69,7 +69,7 @@ namespace ONENOTE2
         /// 添加笔记页
         /// </summary>
         /// <param name="note"></param>
-        public void addNote(Note note)
+        public void addNote(Note1 note)
         {            
             notes.Add(note);            
         }
@@ -96,7 +96,7 @@ namespace ONENOTE2
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public Note getNote(int index)
+        public Note1 getNote(int index)
         {
             if(index < notes.Count)
             {
@@ -117,9 +117,9 @@ namespace ONENOTE2
         {
             try
             {
-                foreach (Note note in notes)
+                foreach (Note1 note in notes)
                 {
-                    String destFileName = directoryName + @"\" + note.getName() + Note.getFormat();
+                    String destFileName = directoryName + @"\" + note.getName() + Note1.getFormat();
                     File.Copy(note.getRecordLocation(),destFileName,true);
                 }
             }
@@ -136,7 +136,7 @@ namespace ONENOTE2
         /// 获取笔记页列表
         /// </summary>
         /// <returns></returns>
-        public List<Note> GetNotes()
+        public List<Note1> GetNotes()
         {
             return notes;
         }
@@ -148,7 +148,7 @@ namespace ONENOTE2
         /// <returns></returns>
         public Boolean existNote(String path)
         {
-            foreach(Note note in notes)
+            foreach(Note1 note in notes)
             {
                 if (path.Equals(note.getRecordLocation())) return true;
             }

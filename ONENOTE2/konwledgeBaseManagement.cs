@@ -10,7 +10,7 @@ namespace ONENOTE2
     class KonwledgeBaseManagement
     {
         #region 成员数据 List<KnowledgeBase>
-        List<KnowledgeBase> knowledgeBases = new List<KnowledgeBase>();
+        List<KnowledgeBase1> knowledgeBases = new List<KnowledgeBase1>();
         #endregion
 
         #region 成员方法
@@ -19,7 +19,7 @@ namespace ONENOTE2
         /// 向知识库列表（knowledgeBases）中添加新的知识库（KnowledgeBase）对象
         /// </summary>
         /// <param name="kb"></param>
-        public void addKnowledgeBase(KnowledgeBase kb)
+        public void addKnowledgeBase(KnowledgeBase1 kb)
         {
             knowledgeBases.Add(kb);
         }
@@ -28,7 +28,7 @@ namespace ONENOTE2
         /// 获取knowledgeBases列表
         /// </summary>
         /// <returns></returns>
-        public List<KnowledgeBase> getKBS()
+        public List<KnowledgeBase1> getKBS()
         {
             return knowledgeBases;
         }
@@ -38,10 +38,10 @@ namespace ONENOTE2
         /// </summary>
         /// <param name="knowledgeBase"></param>
         /// <returns></returns>
-        public Boolean existKB(KnowledgeBase knowledgeBase)
+        public Boolean existKB(KnowledgeBase1 knowledgeBase)
         {
             String kbLocation = knowledgeBase.getRecordLocation();
-            foreach (KnowledgeBase kb in knowledgeBases)
+            foreach (KnowledgeBase1 kb in knowledgeBases)
             {
                 if (kb.getRecordLocation().Equals(kbLocation))
                 { 
@@ -56,7 +56,7 @@ namespace ONENOTE2
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public KnowledgeBase getKB(int index)
+        public KnowledgeBase1 getKB(int index)
         {
             if(index < knowledgeBases.Count)
             {

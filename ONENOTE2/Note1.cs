@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace ONENOTE2 
 {
     [Serializable()]
-    class Note
+    class Note1
     {
         #region 构造方法
         /// <summary>
@@ -17,7 +17,7 @@ namespace ONENOTE2
         /// </summary>
         /// <param name="name"></param>
         /// <param name="recordLocation"></param>
-        public Note(String name,String recordLocation) {
+        public Note1(String name,String recordLocation) {
             if (name.EndsWith(format))
             {
                 this.name = name.Substring(0, name.Length - format.Length);

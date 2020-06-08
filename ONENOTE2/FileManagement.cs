@@ -17,18 +17,18 @@ namespace ONENOTE2
         /// </summary>
         /// <param name="selectedPath"></param>
         /// <returns></returns>
-        private static KnowledgeBase newKB(String selectedPath)
+        private static KnowledgeBase1 newKB(String selectedPath)
         {
             // 新建了一个知识库实例
-            KnowledgeBase knowledgeBase = new KnowledgeBase(selectedPath);
+            KnowledgeBase1 knowledgeBase = new KnowledgeBase1(selectedPath);
 
             // 将该路径中所有符合格式（.rtf）的文件都添加到该知识库中作为笔记页
             DirectoryInfo TheFolder = new DirectoryInfo(selectedPath);
             foreach (FileInfo fi in TheFolder.GetFiles())
             {
-                if (fi.Name.EndsWith(Note.getFormat()))
+                if (fi.Name.EndsWith(Note1.getFormat()))
                 {
-                    Note note = new Note(fi.Name, knowledgeBase.getRecordLocation());
+                    Note1 note = new Note1(fi.Name, knowledgeBase.getRecordLocation());
                     knowledgeBase.addNote(note);
                 }
             }
@@ -45,7 +45,7 @@ namespace ONENOTE2
         {
             // 选择一个文件夹作为新的知识库对象
             String selectedPath = showFolderBrowserDialog("添加知识库");
-            KnowledgeBase kb;
+            KnowledgeBase1 kb;
             if (null != selectedPath)
             {
                 kb = newKB(selectedPath);
@@ -63,7 +63,7 @@ namespace ONENOTE2
         /// GUI代码。
         /// </summary>
         /// <param name="knowledgeBase"></param>
-        public static void exportKB(KnowledgeBase knowledgeBase)
+        public static void exportKB(KnowledgeBase1 knowledgeBase)
         {
             // 创建文件夹浏览器并获得导出目标路径
             String selectedPath = showFolderBrowserDialog("导出笔记");
@@ -163,7 +163,7 @@ namespace ONENOTE2
 
                 // 在当前工作路径下新建知识库
                 // 测试名？
-                KnowledgeBase kb = new KnowledgeBase(getRecordLocation()+@"\默认知识库");
+                KnowledgeBase1 kb = new KnowledgeBase1(getRecordLocation()+@"\默认知识库");
 
                 // 在当前工作路径中，添加与新建的知识库对应的文件夹
                 if (!Directory.Exists(kb.getRecordLocation()))
@@ -173,7 +173,7 @@ namespace ONENOTE2
 
                 // 新建笔记页
                 // 测试代码？
-                Note note1 = new Note("默认笔记",kb.getRecordLocation());
+                Note1 note1 = new Note1("默认笔记",kb.getRecordLocation());
 
                 // 在新建知识库路径中，创建与新建的笔记页对应的富文本文件
                 // 若对应文件已存在，则将其删除以便新建
@@ -221,7 +221,7 @@ namespace ONENOTE2
         /// <returns></returns>
         public static Boolean newKB(KonwledgeBaseManagement konwledgeBaseManagement, String KBname)
         {
-            KnowledgeBase kb = new KnowledgeBase(getRecordLocation(), KBname);
+            KnowledgeBase1 kb = new KnowledgeBase1(getRecordLocation(), KBname);
             if (!konwledgeBaseManagement.existKB(kb))
             {
                 konwledgeBaseManagement.addKnowledgeBase(kb);
@@ -244,7 +244,7 @@ namespace ONENOTE2
         /// <param name="fileNames"></param>
         /// <param name="konwledgeBaseManagement"></param>
         /// <param name="knowledgeBase"></param>
-        private static void importNote(String[] fileNames, KonwledgeBaseManagement konwledgeBaseManagement,KnowledgeBase knowledgeBase)
+        private static void importNote(String[] fileNames, KonwledgeBaseManagement konwledgeBaseManagement,KnowledgeBase1 knowledgeBase)
         {
             // 不会用到的初始值？
             int index = fileNames[0].LastIndexOf(@"\") + 1;
@@ -265,7 +265,7 @@ namespace ONENOTE2
                     String name = fileNames[i].Substring(index, fileNames[i].Length - index);
 
                     //新建笔记页对象
-                    Note note = new Note(name, knowledgeBase.getRecordLocation());
+                    Note1 note = new Note1(name, knowledgeBase.getRecordLocation());
 
                     // 添加该笔记页到指定的知识库中
                     knowledgeBase.addNote(note);
@@ -304,7 +304,7 @@ namespace ONENOTE2
         /// </summary>
         /// <param name="konwledgeBaseManagement"></param>
         /// <param name="knowledgeBase"></param>        
-        public static void importNoteDialog(KonwledgeBaseManagement konwledgeBaseManagement, KnowledgeBase knowledgeBase)
+        public static void importNoteDialog(KonwledgeBaseManagement konwledgeBaseManagement, KnowledgeBase1 knowledgeBase)
         {
             if (null != knowledgeBase)
             {
@@ -327,13 +327,13 @@ namespace ONENOTE2
         /// GUI代码。将“判断重名-若重名，覆盖与否”的逻辑单独写成方法，传入string提示信息
         /// </summary>
         /// <param name="note"></param>
-        public static void exportNote(Note note)//导出笔记
+        public static void exportNote(Note1 note)//导出笔记
         {
             // 选择导出笔记的目标文件夹
             String selectedPath = showFolderBrowserDialog("导出笔记");
 
             // 获取目标路径
-            String filePath = selectedPath + @"\" + note.getName() + Note.getFormat();
+            String filePath = selectedPath + @"\" + note.getName() + Note1.getFormat();
 
             // 若该路径中存在同名的笔记页文件，进行提示
             if (File.Exists(filePath))
@@ -360,12 +360,12 @@ namespace ONENOTE2
         /// <param name="knowledgeBase"></param>
         /// <param name="noteName"></param>
         /// <returns></returns>
-        public static Note newNote(KnowledgeBase knowledgeBase, String noteName)
+        public static Note1 newNote(KnowledgeBase1 knowledgeBase, String noteName)
         {   
             // 若knowledgeBase有效则新建笔记页对象
             if (null != knowledgeBase)
             {
-                Note note = new Note(noteName, knowledgeBase.getRecordLocation());
+                Note1 note = new Note1(noteName, knowledgeBase.getRecordLocation());
 
                 // 若目标知识库中不存在同名的笔记页对象，则添加
                 String path = note.getRecordLocation();
@@ -422,7 +422,7 @@ namespace ONENOTE2
                 OpenFileDialog dialog = new OpenFileDialog();
 
                 // 设置搜索的文件格式
-                dialog.Filter = "*" + Note.getFormat() + "|*" + Note.getFormat();
+                dialog.Filter = "*" + Note1.getFormat() + "|*" + Note1.getFormat();
 
                 // 启用多选
                 dialog.Multiselect = true;
