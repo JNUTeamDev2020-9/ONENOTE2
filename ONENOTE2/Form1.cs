@@ -475,6 +475,21 @@ namespace ONENOTE2
         }
 
         /// <summary>
+        /// 保存全部的点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveAll_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int index = 0; index < richTextBoxes.Count; index++) {
+                RichTextBox rtx = richTextBoxes.ElementAt(index);
+                Note note = noteList.ElementAt(index);
+                note.Content = rtx.Rtf;
+                noteDatabase.UpdateNote(note);
+            }
+        }
+
+        /// <summary>
         /// 将笔记页和富文本绑定
         /// </summary>
         /// <param name="nodeForm"></param>
@@ -572,7 +587,11 @@ namespace ONENOTE2
                     bool isClose = x > myTabRect.X && x < myTabRect.Right && y > myTabRect.Y && y < myTabRect.Bottom;
                     if (isClose == true)
                     {
+                        int index = note_tabControl.SelectedIndex;
+                        noteList.RemoveAt(index);
+                        richTextBoxes.RemoveAt(index);
                         this.note_tabControl.TabPages.Remove(this.note_tabControl.SelectedTab);
+
                     }
                 }
             }
@@ -599,8 +618,9 @@ namespace ONENOTE2
         /// </summary>
         /// <param name="objFrm"></param>
         /// <param name="name"></param>
-        private void OpenForm(Form objFrm, String name)    //新建一个tabpage,并显示
+        private void OpenForm(Form objFrm, String name)
         {
+            
             //嵌入子窗体到父窗体中，把添加学员信息嵌入到主窗体右侧
             objFrm.TopLevel = false;                                //将子窗体设置成非最高层，非顶级控件
             objFrm.WindowState = FormWindowState.Maximized;        //将当前窗口设置成最大化
@@ -619,14 +639,29 @@ namespace ONENOTE2
             objFrm.Parent = this.note_tabControl.SelectedTab;     //指定子窗体显示的容器
             objFrm.Show();
         }
+
+        /// <summary>
+        /// 判断该笔记是否已经打开
+        /// </summary>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        int noteOpened(Note note)
+        {
+            for (int i = 0; i < noteList.Count; i++) {
+                Note item = noteList.ElementAt(i);
+                if (item.Title.Equals(note.Title) && item.Directory.Equals(note.Directory)) return i;
+            }
+            return -1;
+        }
         #endregion
+
 
         #endregion
 
         #region 笔记页和知识库
 
         #region 相关数据
-        
+
         List<RichTextBox> richTextBoxes = new List<RichTextBox>(); //当前页面的所有编辑框
         List<Note> noteList = new List<Note>(); //和当前页面的编辑框绑定的笔记页
         #endregion
@@ -1136,10 +1171,16 @@ namespace ONENOTE2
                     int ip = prant.Index;
                     //MessageBox.Show("" + index+"-"+ip);
                     Note note = noteDatabase.FetchNote(KBS.ElementAt(ip).Name).ElementAt(index);
-                    
-                    bindingNoteForm(nodeForm, note);
-                    OpenForm(nodeForm, note.Title);
-                    showNote(nodeForm, note);
+                    int i = noteOpened(note);
+                    if (-1 == i)
+                    {
+                        bindingNoteForm(nodeForm, note);
+                        OpenForm(nodeForm, note.Title);
+                        showNote(nodeForm, note);
+                    }
+                    else {
+                        note_tabControl.SelectedIndex = i;
+                    }
                     //MessageBox.Show("" + note.getRecordLocation());
                 }
             }
@@ -1214,7 +1255,10 @@ namespace ONENOTE2
                 return null;
             }
         }
+
+        
         #endregion
+
 
         #region 撤销，重做
         /// <summary>

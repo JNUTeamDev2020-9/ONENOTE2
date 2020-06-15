@@ -36,8 +36,9 @@
             this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.save_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lastOperation_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAll_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextOperation_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.重做ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_tabControl = new System.Windows.Forms.TabControl();
             this.start_tabpage = new System.Windows.Forms.TabPage();
             this.insert_toolStrip = new System.Windows.Forms.ToolStrip();
@@ -57,7 +58,6 @@
             this.contents_tabPage = new System.Windows.Forms.TabPage();
             this.list_treeView = new System.Windows.Forms.TreeView();
             this.search_tabPage = new System.Windows.Forms.TabPage();
-            this.history_tabPage = new System.Windows.Forms.TabPage();
             this.note_tabControl = new System.Windows.Forms.TabControl();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.knowbank_contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -88,8 +88,9 @@
             this.top_menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.file_ToolStripMenuItem,
             this.save_ToolStripMenuItem,
-            this.lastOperation_ToolStripMenuItem,
-            this.nextOperation_ToolStripMenuItem});
+            this.saveAll_ToolStripMenuItem,
+            this.nextOperation_ToolStripMenuItem,
+            this.重做ToolStripMenuItem});
             this.top_menuStrip.Location = new System.Drawing.Point(0, 0);
             this.top_menuStrip.Name = "top_menuStrip";
             this.top_menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -132,19 +133,26 @@
             this.save_ToolStripMenuItem.Text = "保存";
             this.save_ToolStripMenuItem.Click += new System.EventHandler(this.save_ToolStripMenuItem_Click);
             // 
-            // lastOperation_ToolStripMenuItem
+            // saveAll_ToolStripMenuItem
             // 
-            this.lastOperation_ToolStripMenuItem.Name = "lastOperation_ToolStripMenuItem";
-            this.lastOperation_ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.lastOperation_ToolStripMenuItem.Text = "撤销";
-            this.lastOperation_ToolStripMenuItem.Click += new System.EventHandler(this.lastOperation_ToolStripMenuItem_Click);
+            this.saveAll_ToolStripMenuItem.Name = "saveAll_ToolStripMenuItem";
+            this.saveAll_ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.saveAll_ToolStripMenuItem.Text = "全部保存";
+            this.saveAll_ToolStripMenuItem.Click += new System.EventHandler(this.saveAll_ToolStripMenuItem_Click);
             // 
             // nextOperation_ToolStripMenuItem
             // 
             this.nextOperation_ToolStripMenuItem.Name = "nextOperation_ToolStripMenuItem";
             this.nextOperation_ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.nextOperation_ToolStripMenuItem.Text = "重做";
-            this.nextOperation_ToolStripMenuItem.Click += new System.EventHandler(this.nextOperation_ToolStripMenuItem_Click);
+            this.nextOperation_ToolStripMenuItem.Text = "撤销";
+            this.nextOperation_ToolStripMenuItem.Click += new System.EventHandler(this.lastOperation_ToolStripMenuItem_Click);
+            // 
+            // 重做ToolStripMenuItem
+            // 
+            this.重做ToolStripMenuItem.Name = "重做ToolStripMenuItem";
+            this.重做ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.重做ToolStripMenuItem.Text = "重做";
+            this.重做ToolStripMenuItem.Click += new System.EventHandler(this.nextOperation_ToolStripMenuItem_Click);
             // 
             // menu_tabControl
             // 
@@ -344,7 +352,6 @@
             // 
             this.left_tabControl.Controls.Add(this.contents_tabPage);
             this.left_tabControl.Controls.Add(this.search_tabPage);
-            this.left_tabControl.Controls.Add(this.history_tabPage);
             this.left_tabControl.Dock = System.Windows.Forms.DockStyle.Left;
             this.left_tabControl.ItemSize = new System.Drawing.Size(59, 20);
             this.left_tabControl.Location = new System.Drawing.Point(0, 102);
@@ -388,17 +395,6 @@
             this.search_tabPage.TabIndex = 1;
             this.search_tabPage.Text = "搜索";
             this.search_tabPage.UseVisualStyleBackColor = true;
-            // 
-            // history_tabPage
-            // 
-            this.history_tabPage.Location = new System.Drawing.Point(4, 24);
-            this.history_tabPage.Margin = new System.Windows.Forms.Padding(4);
-            this.history_tabPage.Name = "history_tabPage";
-            this.history_tabPage.Padding = new System.Windows.Forms.Padding(4);
-            this.history_tabPage.Size = new System.Drawing.Size(232, 405);
-            this.history_tabPage.TabIndex = 2;
-            this.history_tabPage.Text = "历史";
-            this.history_tabPage.UseVisualStyleBackColor = true;
             // 
             // note_tabControl
             // 
@@ -527,7 +523,7 @@
         private System.Windows.Forms.ToolStripMenuItem 导出ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem save_ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lastOperation_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAll_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nextOperation_ToolStripMenuItem;
         private System.Windows.Forms.TabControl menu_tabControl;
         private System.Windows.Forms.TabPage start_tabpage;
@@ -535,7 +531,6 @@
         private System.Windows.Forms.TabControl left_tabControl;
         private System.Windows.Forms.TabPage contents_tabPage;
         private System.Windows.Forms.TabPage search_tabPage;
-        private System.Windows.Forms.TabPage history_tabPage;
         private System.Windows.Forms.TabControl note_tabControl;
         private System.Windows.Forms.ToolStrip start_toolStrip;
         private System.Windows.Forms.ToolStripButton pictureinsert_toolStripButton;
@@ -560,6 +555,7 @@
         private System.Windows.Forms.ToolStripMenuItem 导出知识库ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 新建笔记ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 新建知识库ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 重做ToolStripMenuItem;
     }
 }
 
