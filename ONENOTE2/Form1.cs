@@ -19,6 +19,7 @@ namespace ONENOTE2
         const int CLOSE_SIZE = 15;//用于绘制选项卡关闭按钮
         NoteDatabase noteDatabase; //新的数据库
         List<KnowledgeBase> KBS; //新的知识库列表
+        Dictionary<string, string> note_key = new Dictionary<string, string>();
         #endregion
 
         #region 构造方法与加载
@@ -36,6 +37,7 @@ namespace ONENOTE2
             list_treeView.ExpandAll();
 
         }
+       
         private void loadTreeView() //加载树目录
         {
             
@@ -1280,6 +1282,68 @@ namespace ONENOTE2
         private void nextOperation_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NodeForm.NoteRedo();
+        }
+
+        #endregion
+
+        #region 搜索
+        private void listView_seek_Click(object sender, MouseEventArgs e)//双击查询列表子项事件
+        {
+            if (this.listView_seek.SelectedItems.Count == 0)
+                return;
+            string note_title = this.listView_seek.SelectedItems[0].Text.ToString();
+            NodeForm nodeForm = new NodeForm();
+            Note note = noteDatabase.FetchNote(note_key[note_title], note_title);
+            int i = noteOpened(note);
+            if (-1 == i)
+            {
+                bindingNoteForm(nodeForm, note);
+                OpenForm(nodeForm, note.Title);
+                showNote(nodeForm, note);
+                SearchKey(textBox_seek.Text, nodeForm.edit_richTextBox);
+            }
+            else
+            {
+                note_tabControl.SelectedIndex = i;
+            }      
+         }
+                   
+        public void SearchKey(string text, RichTextBox rtb)//在richtextbox中高亮显示关键字
+        {
+            int index = rtb.Find(text, RichTextBoxFinds.MatchCase);
+            int startPos = index;
+            int nextIndex = 0;
+            while (nextIndex != startPos)
+            {
+                rtb.SelectionStart = index;
+                rtb.SelectionLength = text.Length;
+                rtb.SelectionColor = Color.Blue;
+                rtb.SelectionFont = new Font("Times New Roman", (float)12, FontStyle.Bold);
+                rtb.Focus();
+                nextIndex = rtb.Find(text, index + text.Length, RichTextBoxFinds.MatchCase);
+                if (nextIndex == -1)
+                    nextIndex = startPos;
+                index = nextIndex;
+            }
+        }
+
+        private void button_seek_Click(object sender, EventArgs e)//查找所有笔记页中是否存在匹配关键字的笔记页
+        {
+            listView_seek.Items.Clear();
+            foreach (KnowledgeBase KB in KBS)
+            {
+                List<Note> notes = noteDatabase.FetchNote(KB.Name);
+                foreach(Note note in notes)
+                {
+                    RichTextBox rtb = new RichTextBox();
+                    rtb.Rtf = note.Content;
+                    if (-1 != rtb.Find(textBox_seek.Text, RichTextBoxFinds.MatchCase))
+                    {
+                        listView_seek.Items.Add(note.Title).SubItems.Add(KB.Name);
+                        note_key.Add(note.Title, KB.Name);
+                    }
+                }
+            }
         }
 
         #endregion

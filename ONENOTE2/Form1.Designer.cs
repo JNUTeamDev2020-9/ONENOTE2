@@ -58,6 +58,9 @@
             this.contents_tabPage = new System.Windows.Forms.TabPage();
             this.list_treeView = new System.Windows.Forms.TreeView();
             this.search_tabPage = new System.Windows.Forms.TabPage();
+            this.listView_seek = new System.Windows.Forms.ListView();
+            this.button_seek = new System.Windows.Forms.Button();
+            this.textBox_seek = new System.Windows.Forms.TextBox();
             this.note_tabControl = new System.Windows.Forms.TabControl();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.knowbank_contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -77,6 +80,7 @@
             this.start_toolStrip.SuspendLayout();
             this.left_tabControl.SuspendLayout();
             this.contents_tabPage.SuspendLayout();
+            this.search_tabPage.SuspendLayout();
             this.knowbank_contextMenuStrip.SuspendLayout();
             this.note_contextMenuStrip.SuspendLayout();
             this.blackContextMunuStrip.SuspendLayout();
@@ -193,7 +197,7 @@
             this.insert_toolStrip.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.insert_toolStrip.Name = "insert_toolStrip";
             this.insert_toolStrip.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.insert_toolStrip.Size = new System.Drawing.Size(1133, 29);
+            this.insert_toolStrip.Size = new System.Drawing.Size(1133, 28);
             this.insert_toolStrip.TabIndex = 0;
             this.insert_toolStrip.Text = "toolStrip2";
             // 
@@ -205,7 +209,7 @@
             "黑体"});
             this.font_toolStripComboBox.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.font_toolStripComboBox.Name = "font_toolStripComboBox";
-            this.font_toolStripComboBox.Size = new System.Drawing.Size(105, 29);
+            this.font_toolStripComboBox.Size = new System.Drawing.Size(105, 28);
             this.font_toolStripComboBox.Text = "宋体";
             this.font_toolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.font_toolStripComboBox_SelectedIndexChanged);
             // 
@@ -228,41 +232,38 @@
             "24"});
             this.fontsize_toolStripComboBox.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.fontsize_toolStripComboBox.Name = "fontsize_toolStripComboBox";
-            this.fontsize_toolStripComboBox.Size = new System.Drawing.Size(105, 29);
+            this.fontsize_toolStripComboBox.Size = new System.Drawing.Size(105, 28);
             this.fontsize_toolStripComboBox.Text = "11";
             this.fontsize_toolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.fontsize_toolStripComboBox_SelectedIndexChanged);
             // 
             // bold_toolStripButton
             // 
             this.bold_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bold_toolStripButton.Image = global::ONENOTE2.Properties.Resources.加粗图标;
             this.bold_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bold_toolStripButton.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.bold_toolStripButton.Name = "bold_toolStripButton";
-            this.bold_toolStripButton.Size = new System.Drawing.Size(29, 29);
+            this.bold_toolStripButton.Size = new System.Drawing.Size(29, 28);
             this.bold_toolStripButton.Text = "加粗";
             this.bold_toolStripButton.Click += new System.EventHandler(this.bold_toolStripButton_Click);
             // 
             // inclines_toolStripButton
             // 
             this.inclines_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.inclines_toolStripButton.Image = global::ONENOTE2.Properties.Resources.斜体图标;
             this.inclines_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.inclines_toolStripButton.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.inclines_toolStripButton.Name = "inclines_toolStripButton";
-            this.inclines_toolStripButton.Size = new System.Drawing.Size(29, 29);
+            this.inclines_toolStripButton.Size = new System.Drawing.Size(29, 28);
             this.inclines_toolStripButton.Text = "斜体";
             this.inclines_toolStripButton.Click += new System.EventHandler(this.inclines_toolStripButton_Click);
             // 
             // underline_toolStripButton
             // 
             this.underline_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.underline_toolStripButton.Image = global::ONENOTE2.Properties.Resources.下划线图标;
             this.underline_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.underline_toolStripButton.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.underline_toolStripButton.Name = "underline_toolStripButton";
             this.underline_toolStripButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.underline_toolStripButton.Size = new System.Drawing.Size(29, 29);
+            this.underline_toolStripButton.Size = new System.Drawing.Size(29, 28);
             this.underline_toolStripButton.Text = "下划线";
             this.underline_toolStripButton.Click += new System.EventHandler(this.underline_toolStripButton_Click);
             // 
@@ -273,7 +274,7 @@
             this.fontcolor_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fontcolor_toolStripButton.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.fontcolor_toolStripButton.Name = "fontcolor_toolStripButton";
-            this.fontcolor_toolStripButton.Size = new System.Drawing.Size(29, 29);
+            this.fontcolor_toolStripButton.Size = new System.Drawing.Size(29, 28);
             this.fontcolor_toolStripButton.Text = "A";
             this.fontcolor_toolStripButton.ToolTipText = "字体颜色";
             this.fontcolor_toolStripButton.Click += new System.EventHandler(this.fontcolor_toolStripButton_Click);
@@ -301,50 +302,46 @@
             this.start_toolStrip.Location = new System.Drawing.Point(4, 4);
             this.start_toolStrip.Margin = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.start_toolStrip.Name = "start_toolStrip";
-            this.start_toolStrip.Size = new System.Drawing.Size(1133, 27);
+            this.start_toolStrip.Size = new System.Drawing.Size(1133, 25);
             this.start_toolStrip.TabIndex = 0;
             this.start_toolStrip.Text = "toolStrip1";
             // 
             // pictureinsert_toolStripButton
             // 
             this.pictureinsert_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pictureinsert_toolStripButton.Image = global::ONENOTE2.Properties.Resources.插入图片图标;
             this.pictureinsert_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pictureinsert_toolStripButton.Margin = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.pictureinsert_toolStripButton.Name = "pictureinsert_toolStripButton";
-            this.pictureinsert_toolStripButton.Size = new System.Drawing.Size(54, 27);
+            this.pictureinsert_toolStripButton.Size = new System.Drawing.Size(29, 25);
             this.pictureinsert_toolStripButton.Text = "toolStripButton1";
             this.pictureinsert_toolStripButton.Click += new System.EventHandler(this.pictrueinsert_toolStripButton_Click);
             // 
             // fileinsret_toolStripButton
             // 
             this.fileinsret_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fileinsret_toolStripButton.Image = global::ONENOTE2.Properties.Resources.插入文件图标;
             this.fileinsret_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fileinsret_toolStripButton.Margin = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.fileinsret_toolStripButton.Name = "fileinsret_toolStripButton";
-            this.fileinsret_toolStripButton.Size = new System.Drawing.Size(54, 27);
+            this.fileinsret_toolStripButton.Size = new System.Drawing.Size(29, 25);
             this.fileinsret_toolStripButton.Text = "toolStripButton2";
             this.fileinsret_toolStripButton.Click += new System.EventHandler(this.fileinsert_toolStripButton_Click);
             // 
             // musicinsert_toolStripButton
             // 
             this.musicinsert_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.musicinsert_toolStripButton.Image = global::ONENOTE2.Properties.Resources.插入音频图标;
             this.musicinsert_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.musicinsert_toolStripButton.Margin = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.musicinsert_toolStripButton.Name = "musicinsert_toolStripButton";
-            this.musicinsert_toolStripButton.Size = new System.Drawing.Size(54, 27);
+            this.musicinsert_toolStripButton.Size = new System.Drawing.Size(29, 25);
             this.musicinsert_toolStripButton.Text = "toolStripButton3";
             this.musicinsert_toolStripButton.Click += new System.EventHandler(this.musicinsert_toolStripButton_Click);
             // 
             // urlinsert_toolStripButton
             // 
             this.urlinsert_toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.urlinsert_toolStripButton.Image = global::ONENOTE2.Properties.Resources.插入链接图标;
             this.urlinsert_toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.urlinsert_toolStripButton.Name = "urlinsert_toolStripButton";
-            this.urlinsert_toolStripButton.Size = new System.Drawing.Size(54, 24);
+            this.urlinsert_toolStripButton.Size = new System.Drawing.Size(29, 22);
             this.urlinsert_toolStripButton.Text = "toolStripButton4";
             this.urlinsert_toolStripButton.Click += new System.EventHandler(this.urlinsert_toolStripButton_Click);
             // 
@@ -387,6 +384,9 @@
             // 
             // search_tabPage
             // 
+            this.search_tabPage.Controls.Add(this.listView_seek);
+            this.search_tabPage.Controls.Add(this.button_seek);
+            this.search_tabPage.Controls.Add(this.textBox_seek);
             this.search_tabPage.Location = new System.Drawing.Point(4, 24);
             this.search_tabPage.Margin = new System.Windows.Forms.Padding(4);
             this.search_tabPage.Name = "search_tabPage";
@@ -395,6 +395,34 @@
             this.search_tabPage.TabIndex = 1;
             this.search_tabPage.Text = "搜索";
             this.search_tabPage.UseVisualStyleBackColor = true;
+            // 
+            // listView_seek
+            // 
+            this.listView_seek.HideSelection = false;
+            this.listView_seek.Location = new System.Drawing.Point(8, 48);
+            this.listView_seek.Name = "listView_seek";
+            this.listView_seek.Size = new System.Drawing.Size(217, 349);
+            this.listView_seek.TabIndex = 2;
+            this.listView_seek.UseCompatibleStateImageBehavior = false;
+            this.listView_seek.View = System.Windows.Forms.View.List;
+            this.listView_seek.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_seek_Click);
+            // 
+            // button_seek
+            // 
+            this.button_seek.Location = new System.Drawing.Point(148, 7);
+            this.button_seek.Name = "button_seek";
+            this.button_seek.Size = new System.Drawing.Size(77, 31);
+            this.button_seek.TabIndex = 1;
+            this.button_seek.Text = "搜索";
+            this.button_seek.UseVisualStyleBackColor = true;
+            this.button_seek.Click += new System.EventHandler(this.button_seek_Click);
+            // 
+            // textBox_seek
+            // 
+            this.textBox_seek.Location = new System.Drawing.Point(8, 12);
+            this.textBox_seek.Name = "textBox_seek";
+            this.textBox_seek.Size = new System.Drawing.Size(119, 25);
+            this.textBox_seek.TabIndex = 0;
             // 
             // note_tabControl
             // 
@@ -507,6 +535,8 @@
             this.start_toolStrip.PerformLayout();
             this.left_tabControl.ResumeLayout(false);
             this.contents_tabPage.ResumeLayout(false);
+            this.search_tabPage.ResumeLayout(false);
+            this.search_tabPage.PerformLayout();
             this.knowbank_contextMenuStrip.ResumeLayout(false);
             this.note_contextMenuStrip.ResumeLayout(false);
             this.blackContextMunuStrip.ResumeLayout(false);
@@ -556,6 +586,9 @@
         private System.Windows.Forms.ToolStripMenuItem 新建笔记ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 新建知识库ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 重做ToolStripMenuItem;
+        private System.Windows.Forms.ListView listView_seek;
+        private System.Windows.Forms.Button button_seek;
+        private System.Windows.Forms.TextBox textBox_seek;
     }
 }
 
